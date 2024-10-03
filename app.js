@@ -297,7 +297,7 @@ async function handleFunctionSelect() {
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
-    } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds' || selectedFunction === 'registryLength') {
+    } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds' || selectedFunction === 'registryLength' || selectedFunction === 'seed' ) {
         inputFieldsDiv.innerHTML = `
             <label for="t">Period:</label>
             <input type="text" id="t" placeholder="Enter value">
