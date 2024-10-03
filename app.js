@@ -411,6 +411,10 @@ async function handleTransaction() {
             const id = document.getElementById('id').value; // Get Registry ID
             const result = await contract.methods.registry(t, id).call();
             resultField.innerText = `Registry Address: ${result}`;
+        } else if (selectedFunction === 'registryLength') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.registry(t).call();
+            resultField.innerText = `Registry Length: ${result}`;
         } else if (selectedFunction === 'shuffler') {
             const account = document.getElementById('account').value; // Get account
             const result = await contract.methods.shuffler(t, account).call();
