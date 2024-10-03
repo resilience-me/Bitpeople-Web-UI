@@ -282,8 +282,10 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'registry') {
         inputFieldsDiv.innerHTML = `
+            <label for="t">Period:</label>
+            <input type="text" id="t" placeholder="Enter value">
             <label for="id">Registry ID:</label>
-            <input type="text" id="id" placeholder="Enter ID"> <!-- Removed address-input class -->
+            <input type="text" id="id" placeholder="Enter ID">
         `;
     } else if (selectedFunction === 'shuffler') {
         inputFieldsDiv.innerHTML = `
@@ -295,10 +297,10 @@ async function handleFunctionSelect() {
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
-    } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds') {
+    } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds' || selectedFunction === 'registryLength') {
         inputFieldsDiv.innerHTML = `
             <label for="t">Period:</label>
-            <input type="text" id="t" placeholder="Enter value"> <!-- Removed address-input class -->
+            <input type="text" id="t" placeholder="Enter value">
         `;
     } else if (selectedFunction === 'revealHash') {
         inputFieldsDiv.innerHTML = `
