@@ -297,12 +297,12 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds') {
         inputFieldsDiv.innerHTML = `
-            <label for="t">T:</label>
+            <label for="t">Period:</label>
             <input type="text" id="t" placeholder="Enter value"> <!-- Removed address-input class -->
         `;
     }
 
-	if (selectedFunction != '') {
+    if (selectedFunction != '') {
         // Show the submit button
         submitButton.style.display = 'block';
     }
