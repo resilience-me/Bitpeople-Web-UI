@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitpeople User Interface</title>
+    <link rel="icon" href="data:image/x-icon;," type="image/x-icon">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Connect Wallet Button -->
+    <button id="connectWalletButton">Connect Wallet</button>
+
+    <!-- Account Display -->
+    <div id="accountDisplay" style="display: none;"></div>
+
+    <!-- Network Warning -->
+    <div id="networkWarning" style="color: red; display: none;"></div>
+
+    <!-- Dropdown Menu for Contract Functions -->
+    <div id="functionContainer" style="display: none;"> <!-- Wrapper for label and select -->
+        <select id="functionSelect">
+            <option value="">--Select Function--</option>
+            <optgroup label="WRITE">
+                <option value="register">Register</option>
+                <option value="optIn">Opt In</option>
+                <option value="shuffle">Shuffle</option>
+                <option value="lateShuffle">Late Shuffle</option>
+                <option value="verify">Verify</option>
+                <option value="judge">Judge</option>
+                <option value="nymVerified">Nym Verified</option>
+                <option value="courtVerified">Court Verified</option>
+                <option value="claimProofOfUniqueHuman">Claim Proof-Of-Unique-Human</option>
+                <option value="dispute">Dispute</option>
+                <option value="reassignNym">Reassign Nym</option>
+                <option value="reassignCourt">Reassign Court</option>
+                <option value="borderVote">Border Vote</option>
+                <option value="transfer">Transfer</option>
+                <option value="approve">Approve</option>
+                <option value="transferFrom">Transfer From</option>
+            </optgroup>
+            <optgroup label="READ">
+                <option value="balanceOf">Balance Of</option>
+                <option value="allowance">Allowance</option>
+                <option value="proofOfUniqueHuman">Proof-Of-Unique-Human</option>
+                <option value="population">Population</option>
+                <option value="getPair">Get Pair</option>
+                <option value="nym">Nym</option>
+                <option value="registry">Registry</option>
+                <option value="registryLength">Registry Length</option>
+                <option value="shuffled">Shuffled</option>
+                <option value="shuffler">Shuffler</option>
+                <option value="permits">Permits</option>
+                <option value="commit">Commit</option>
+				<option value="seed">Seed</option>
+            </optgroup>
+            <optgroup label="SCHEDULE">
+                <option value="schedule">Schedule</option>
+                <option value="toSeconds">To Seconds</option>
+                <option value="quarter">Quarter</option>
+                <option value="hour">Hour</option>
+                <option value="pseudonymEvent">Pseudonym Event</option>
+            </optgroup>
+        </select>
+
+        <!-- Dynamic Input Fields Section -->
+        <div id="inputFields"></div>
+
+        <!-- Submit Button -->
+        <button id="submitButton" style="display: none">Submit</button>
+      
+        <!-- Display the result of the transaction or call -->
+        <div id="result" style="display: none"></div>
+    </div>
+
+    <!-- Web3.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
