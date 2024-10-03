@@ -1,0 +1,73 @@
+/* Reset some default styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Style the button */
+button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+/* Style for the input fields */
+input[type="text"], select {
+	display: block; 
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Style for the result display */
+#result {
+    display: none; /* Hide initially */
+    background-color: #e7f3fe;
+    color: #31708f;
+    border: 1px solid #bce8f1;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Style for the warning messages */
+#networkWarning {
+    color: red;
+    font-weight: bold;
+}
+
+.address-input {
+    width: 46ch; /* Set a specific width for address fields */
+    max-width: 100%; /* Prevent it from exceeding the container */
+}
+
+.bytes32-input {
+    width: 68ch; /* Set a specific width for address fields */
+    max-width: 100%; /* Prevent it from exceeding the container */
+}
+
+.truncated-address, .truncated-hex {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+}
