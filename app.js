@@ -201,7 +201,7 @@ async function handleFunctionSelect() {
     const selectedFunction = document.getElementById('functionSelect').value;
     const inputFieldsDiv = document.getElementById('inputFields');
     const submitButton = document.getElementById('submitButton');
-	clearFunctionContainer();
+    clearFunctionContainer();
 
     if (selectedFunction === 'approve') {
         inputFieldsDiv.innerHTML = `
@@ -212,7 +212,7 @@ async function handleFunctionSelect() {
             <input type="text" id="value" placeholder="Enter value (uint256)">
         `;
     } else if (selectedFunction === 'balanceOf') {
-        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+        const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
             ${getPeriodSelector(currentSchedule, false, true, true)} <!-- Preselector for Current and Next -->
             ${tokenSelectorHTML} <!-- Token selector -->
@@ -223,16 +223,16 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${tokenSelectorHTML} <!-- Token selector comes first now -->
             <label for="to">Recipient Address:</label>
-            <input type="text" id="to" placeholder="Enter recipient address">
+            <input type="text" id="to" placeholder="Enter recipient address" class="address-input">
             <label for="value">Value:</label>
             <input type="text" id="value" placeholder="Enter value (uint256)">
         `;
     } else if (selectedFunction === 'court') {
-        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+        const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
             ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Previous and Current -->
             <label for="account">Account:</label>
-            <input type="text" id="account" placeholder="Enter account address">
+            <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'register') {
         const randomNumber = generateRandomNumber(); // Generate the random number
@@ -240,25 +240,65 @@ async function handleFunctionSelect() {
             <label for="randomNumber">Random Number (preimage):</label>
             <input type="text" id="randomNumber" placeholder="Enter random number" value="${randomNumber}" class="bytes32-input">
         `;
-	} else if (selectedFunction === 'reassignCourt') {
+    } else if (selectedFunction === 'reassignCourt') {
         inputFieldsDiv.innerHTML = `
             <label for="early">Early Reassign?</label>
             <input type="checkbox" id="early">
         `;
-    } else if (selectedFunction === 'allowance') {
-        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+    } else if (selectedFunction === 'reassignNym') {
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, false, true, true)} <!-- Preselector for Current and Next -->
-            ${tokenSelectorHTML} <!-- Token selector -->
-            <label for="owner">Owner Address:</label>
-            <input type="text" id="owner" placeholder="Enter owner address">
-            <label for="spender">Spender Address:</label>
-            <input type="text" id="spender" placeholder="Enter spender address">
+            <label for="early">Early Reassign?</label>
+            <input type="checkbox" id="early">
         `;
     } else if (selectedFunction === 'dispute') {
         inputFieldsDiv.innerHTML = `
             <label for="early">Early Dispute?</label>
             <input type="checkbox" id="early">
+        `;
+    } else if (selectedFunction === 'borderVote') {
+        inputFieldsDiv.innerHTML = `
+            <label for="target">Target:</label>
+            <input type="text" id="target" placeholder="Enter target" class="address-input">
+        `;
+    } else if (selectedFunction === 'allowance') {
+        const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
+        inputFieldsDiv.innerHTML = `
+            ${getPeriodSelector(currentSchedule, false, true, true)} <!-- Preselector for Current and Next -->
+            ${tokenSelectorHTML} <!-- Token selector -->
+            <label for="owner">Owner Address:</label>
+            <input type="text" id="owner" placeholder="Enter owner address" class="address-input">
+            <label for="spender">Spender Address:</label>
+            <input type="text" id="spender" placeholder="Enter spender address" class="address-input">
+        `;
+    } else if (selectedFunction === 'getPair') {
+        inputFieldsDiv.innerHTML = `
+            <label for="id">Pair ID:</label>
+            <input type="text" id="id" placeholder="Enter ID"> <!-- Removed address-input class -->
+        `;
+    } else if (selectedFunction === 'commit') {
+        inputFieldsDiv.innerHTML = `
+            <label for="account">Account:</label>
+            <input type="text" id="account" placeholder="Enter account address" class="address-input">
+        `;
+    } else if (selectedFunction === 'registry') {
+        inputFieldsDiv.innerHTML = `
+            <label for="id">Registry ID:</label>
+            <input type="text" id="id" placeholder="Enter ID"> <!-- Removed address-input class -->
+        `;
+    } else if (selectedFunction === 'shuffler') {
+        inputFieldsDiv.innerHTML = `
+            <label for="account">Account:</label>
+            <input type="text" id="account" placeholder="Enter account address" class="address-input">
+        `;
+    } else if (selectedFunction === 'proofOfUniqueHuman') {
+        inputFieldsDiv.innerHTML = `
+            <label for="account">Account:</label>
+            <input type="text" id="account" placeholder="Enter account address" class="address-input">
+        `;
+    } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds') {
+        inputFieldsDiv.innerHTML = `
+            <label for="t">T:</label>
+            <input type="text" id="t" placeholder="Enter value"> <!-- Removed address-input class -->
         `;
     }
 
