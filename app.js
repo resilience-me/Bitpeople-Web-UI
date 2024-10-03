@@ -436,13 +436,17 @@ async function handleTransaction() {
             const result = await contract.methods.hour(t).call();
             resultField.innerText = `Hour: ${result}`;
         } else if (selectedFunction === 'quarter') {
-            const t = document.getElementById('t').value; // Get schedule
-            const result = await contract.methods.quarter(t).call();
+	    const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
+            const result = await contract.methods.quarter(currentSchedule).call();
             resultField.innerText = `Quarter: ${result}`;
         } else if (selectedFunction === 'toSeconds') {
             const t = document.getElementById('t').value; // Get schedule
             const result = await contract.methods.toSeconds(t).call();
             resultField.innerText = `To Seconds: ${result}`;
+        } else if (selectedFunction === 'pseudonymEvent') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.pseudonymEvent(t).call();
+            resultField.innerText = `Pseudonym Event: ${result}`;
         }
     } catch (error) {
         console.error('Transaction failed:', error);
