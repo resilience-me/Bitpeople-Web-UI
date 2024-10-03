@@ -300,6 +300,11 @@ async function handleFunctionSelect() {
             <label for="t">Period:</label>
             <input type="text" id="t" placeholder="Enter value"> <!-- Removed address-input class -->
         `;
+    } else if (selectedFunction === 'revealHash') {
+        inputFieldsDiv.innerHTML = `
+            <label for="preimage">Preimage:</label>
+            <input type="text" id="preimage" placeholder="Enter hash preimage" class="bytes32-input">
+        `;
     }
 
     if (selectedFunction != '') {
