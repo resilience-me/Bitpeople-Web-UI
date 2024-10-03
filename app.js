@@ -354,6 +354,10 @@ async function handleTransaction() {
             const early = document.getElementById('early').checked;  // Boolean from checkbox
             await contract.methods.reassignCourt(early).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Reassign Court!';
+        } else if (selectedFunction === 'reassignNym') {
+            const early = document.getElementById('early').checked;  // Boolean from checkbox
+            await contract.methods.reassignNym(early).send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Reassign Nym!';
         } else if (selectedFunction === 'allowance') {
             const t = document.getElementById('t').value;
             const token = document.getElementById('token').value;  // Token comes after schedule
@@ -386,22 +390,63 @@ async function handleTransaction() {
         } else if (selectedFunction === 'verify') {
             await contract.methods.verify().send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Verify!';
-        } else if (selectedFunction === 'reassignNym') {
-            const early = document.getElementById('early').checked;  // Boolean from checkbox
-            await contract.methods.reassignNym(early).send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for Reassign Nym!';
         } else if (selectedFunction === 'borderVote') {
             const target = document.getElementById('target').value;
             await contract.methods.borderVote(target).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Border Vote!';
         } else if (selectedFunction === 'revealHash') {
-            const preimage = document.getElementById('preimage').value;
+            const preimage = document.getElementById('preimage').value; // Get the preimage from input
             await contract.methods.revealHash(preimage).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Reveal Hash!';
+        } else if (selectedFunction === 'getPair') {
+            const id = document.getElementById('id').value; // Get Pair ID
+            const result = await contract.methods.getPair(id).call();
+            resultField.innerText = `Pair ID: ${result}`;
+        } else if (selectedFunction === 'commit') {
+            const account = document.getElementById('account').value; // Get account
+            const result = await contract.methods.commit(t, account).call();
+            resultField.innerText = `Commit: ${result}`;
+        } else if (selectedFunction === 'registry') {
+            const t = document.getElementById('t').value; // Get schedule
+            const id = document.getElementById('id').value; // Get Registry ID
+            const result = await contract.methods.registry(t, id).call();
+            resultField.innerText = `Registry Address: ${result}`;
+        } else if (selectedFunction === 'shuffler') {
+            const account = document.getElementById('account').value; // Get account
+            const result = await contract.methods.shuffler(t, account).call();
+            resultField.innerText = `Is Shuffler: ${result}`;
+        } else if (selectedFunction === 'proofOfUniqueHuman') {
+            const account = document.getElementById('account').value; // Get account
+            const result = await contract.methods.proofOfUniqueHuman(t, account).call();
+            resultField.innerText = `Proof Of Unique Human: ${result}`;
+        } else if (selectedFunction === 'population') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.population(t).call();
+            resultField.innerText = `Population: ${result}`;
+        } else if (selectedFunction === 'permits') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.permits(t).call();
+            resultField.innerText = `Permits: ${result}`;
+        } else if (selectedFunction === 'seed') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.seed(t).call();
+            resultField.innerText = `Seed: ${result}`;
+        } else if (selectedFunction === 'hour') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.hour(t).call();
+            resultField.innerText = `Hour: ${result}`;
+        } else if (selectedFunction === 'quarter') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.quarter(t).call();
+            resultField.innerText = `Quarter: ${result}`;
+        } else if (selectedFunction === 'toSeconds') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.toSeconds(t).call();
+            resultField.innerText = `To Seconds: ${result}`;
         }
     } catch (error) {
         console.error('Transaction failed:', error);
         resultField.innerText = 'Transaction failed: ' + error.message;
     }
-        resultField.style.display = 'block'; // Show the result field
+    resultField.style.display = 'block'; // Show the result field
 }
