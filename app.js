@@ -298,11 +298,16 @@ async function handleFunctionSelect() {
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
-    } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds' || selectedFunction === 'registryLength' || selectedFunction === 'seed' || selectedFunction === 'shuffled' || selectedFunction === 'population' || selectedFunction === 'courts' || selectedFunction === 'permits' ) {
+    } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds' || selectedFunction === 'registryLength' || selectedFunction === 'seed' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits' ) {
         inputFieldsDiv.innerHTML = `
             <label for="t">Period:</label>
             <input type="text" id="t" placeholder="Enter value">
         `;
+    } else if (selectedFunction === 'population') {
+	const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+	    inputFieldsDiv.innerHTML = `
+	    ${getPeriodSelector(currentSchedule, true, true, true)} <!-- Preselector for Previous, Current, and Next -->
+	`;
     } else if (selectedFunction === 'revealHash') {
         inputFieldsDiv.innerHTML = `
             <label for="preimage">Preimage:</label>
