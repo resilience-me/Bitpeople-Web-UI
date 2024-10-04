@@ -153,30 +153,37 @@ async function loadABI() {
         return await response.json();
     } catch (error) {
         console.error('Error loading ABI:', error);
-        showWarning('Error loading contract ABI. Please try again.');
+        return null; // Explicitly return null if loading fails
     }
 }
 
 // On page load
 window.addEventListener('load', async () => {
+    const connectWalletButton = document.getElementById('connectWalletButton');
+
     if (typeof window.ethereum !== 'undefined') {
         window.ethereum.on('accountsChanged', handleAccountChange);
 
-        document.getElementById('connectWalletButton').addEventListener('click', connectWallet);
+        connectWalletButton.addEventListener('click', connectWallet);
 
         web3 = new Web3(window.ethereum);
 
+        // Load the ABI and check if it succeeded
         const contractABI = await loadABI();
         if (contractABI) {
             contract = new web3.eth.Contract(contractABI, contractAddress);
-        }
 
-        const accounts = await web3.eth.getAccounts();
-        await handleAccountChange(accounts); // Call the shared function if an account is already connected
+            // Proceed with connecting accounts if ABI is loaded
+            const accounts = await web3.eth.getAccounts();
+            await handleAccountChange(accounts); // Call the shared function if an account is already connected
+        } else {
+            // Disable functionality if ABI fails to load
+            connectWalletButton.disabled = true;
+            showWarning('Unable to load contract ABI.');
+        }
     } else {
         alert('No Ethereum wallet detected!');
         // Disable the Connect Wallet button and show a message
-        const connectWalletButton = document.getElementById('connectWalletButton');
         connectWalletButton.disabled = true;
         showWarning('No Ethereum wallet detected! Please install a Web3 wallet to connect.');
     }
