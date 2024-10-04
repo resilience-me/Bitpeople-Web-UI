@@ -329,7 +329,7 @@ async function handleFunctionSelect() {
             <label for="id">Nym ID:</label>
             <input type="text" id="id" placeholder="Enter ID">
         `;
-    } else if (selectedFunction === 'nym') {
+    } else if (selectedFunction === 'nym ' || selectedFunction === 'shuffler' || selectedFunction === 'court' || selectedFunction === 'commit') {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, false)}
             <label for="account">Account:</label>
@@ -345,13 +345,7 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, false)}
         `;
-    }  else if (selectedFunction === 'shuffler' || selectedFunction === 'court' || selectedFunction === 'commit') {
-        inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, false)}
-            <label for="account">Account:</label>
-            <input type="text" id="account" placeholder="Enter account address" class="address-input">
-        `;
-    } else if (selectedFunction === 'pair') {
+    }  else if (selectedFunction === 'pair') {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, false)}
             <label for="id">ID:</label>
