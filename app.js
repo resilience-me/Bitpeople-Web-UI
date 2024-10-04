@@ -164,7 +164,8 @@ console.log(currentSchedule);
     return parseInt(currentSchedule, 10);
 }
 
-function getPeriodSelector(currentSchedule, includePrevious, includeCurrent, includeNext) {
+async function getPeriodSelector(includePrevious, includeCurrent, includeNext) {
+    const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
     let options = `<label for="t">Select Period:</label><select id="t">`;
 
     // Only include Previous if currentSchedule is greater than 0
