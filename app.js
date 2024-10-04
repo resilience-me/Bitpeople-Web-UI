@@ -3,6 +3,32 @@ let contract;
 const contractAddress = '0x0000000000000000000000000000000000000010';  // Your contract address
 const chainID = 2013;  // Your custom network's chain ID as a number
 
+// Function to write a notification message
+function showNotification(message) {
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.innerHTML = ''; // Clear previous messages
+
+    const notificationDiv = document.createElement('div');
+    notificationDiv.className = 'info-message'; // Class for informational messages
+    notificationDiv.innerText = message;
+
+    messageContainer.appendChild(notificationDiv);
+    messageContainer.style.display = 'block'; // Show the container
+}
+
+// Function to write a warning message
+function showWarning(message) {
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.innerHTML = ''; // Clear previous messages
+
+    const warningDiv = document.createElement('div');
+    warningDiv.className = 'warning-message'; // Class for warning messages
+    warningDiv.innerText = message;
+
+    messageContainer.appendChild(warningDiv);
+    messageContainer.style.display = 'block'; // Show the container
+}
+
 // Function to handle network addition
 async function addCustomNetwork() {
     try {
@@ -107,13 +133,15 @@ async function connectWallet() {
     const connectWalletButton = document.getElementById('connectWalletButton');
     connectWalletButton.disabled = true; // Disable button during connection attempt
 
+    // Show notification when request is sent to the wallet
+    showNotification('Sent request to wallet to login...');
+
     try {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
         await handleAccountChange(accounts); // Use the shared function for account handling
     } catch (error) {
         console.error('Wallet connection failed', error);
-        document.getElementById('notificationMessage').innerText = 'Failed to connect to the wallet. Please try again.';
-        document.getElementById('notificationMessage').style.display = 'block';
+        showWarning('Failed to connect to the wallet. Please try again.');
     } finally {
         isConnecting = false;
         connectWalletButton.disabled = false; // Re-enable button after connection attempt
