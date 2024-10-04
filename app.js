@@ -25,13 +25,6 @@ async function addCustomNetwork() {
     }
 }
 
-// Function to check the network ID
-async function checkNetwork() {
-    const remoteChainID = Number(await web3.eth.getChainId());
-    console.log('Current Chain ID:', remoteChainID); // Log for debugging
-    return remoteChainID === chainID; // Return true if the network ID matches, otherwise false
-}
-
 async function promptNetworkSwitch() {
     document.getElementById('networkWarning').innerText = `A request is being sent to your wallet to switch to the correct network (Chain ID: ${chainID}).`;
     document.getElementById('networkWarning').style.display = 'block';
@@ -46,6 +39,13 @@ async function promptNetworkSwitch() {
         console.error('Network switch failed:', switchError);
         // Optionally update the UI here if needed
     }
+}
+
+// Function to check the network ID
+async function checkNetwork() {
+    const remoteChainID = Number(await web3.eth.getChainId());
+    console.log('Current Chain ID:', remoteChainID); // Log for debugging
+    return remoteChainID === chainID; // Return true if the network ID matches, otherwise false
 }
 
 async function handleNetworkCheck(account) {
