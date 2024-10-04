@@ -167,7 +167,8 @@ console.log(currentSchedule);
 function getPeriodSelector(currentSchedule, includePrevious, includeCurrent, includeNext) {
     let options = `<label for="t">Select Period:</label><select id="t">`;
 
-    if (includePrevious) {
+    // Only include Previous if currentSchedule is greater than 0
+    if (includePrevious && currentSchedule > 0) {
         options += `<option value="${currentSchedule - 1}">Previous</option>`;
     }
     if (includeCurrent) {
