@@ -98,7 +98,15 @@ async function handleAccountChange(accounts) {
     }
 }
 
+let isConnecting = false;
+
 async function connectWallet() {
+    if (isConnecting) return; // Prevent multiple clicks
+    isConnecting = true;
+
+    const connectWalletButton = document.getElementById('connectWalletButton');
+    connectWalletButton.disabled = true; // Disable button during connection attempt
+
     try {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
         await handleAccountChange(accounts); // Use the shared function for account handling
@@ -106,6 +114,9 @@ async function connectWallet() {
         console.error('Wallet connection failed', error);
         document.getElementById('notificationMessage').innerText = 'Failed to connect to the wallet. Please try again.';
         document.getElementById('notificationMessage').style.display = 'block';
+    } finally {
+        isConnecting = false;
+        connectWalletButton.disabled = false; // Re-enable button after connection attempt
     }
 }
 
