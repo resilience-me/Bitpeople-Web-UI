@@ -226,6 +226,16 @@ async function handleFunctionSelect() {
             <label for="value">Value:</label>
             <input type="text" id="value" placeholder="Enter value (uint256)">
         `;
+    } else if (selectedFunction === 'transferFrom') {
+	inputFieldsDiv.innerHTML = `
+	    ${tokenSelectorHTML} <!-- Token selector -->
+	    <label for="from">From Address:</label>
+	    <input type="text" id="from" placeholder="Enter sender address" class="address-input">
+	    <label for="to">Recipient Address:</label>
+	    <input type="text" id="to" placeholder="Enter recipient address" class="address-input">
+	    <label for="value">Value:</label>
+	    <input type="text" id="value" placeholder="Enter value (uint256)">
+	`;
     } else if (selectedFunction === 'court') {
         const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
