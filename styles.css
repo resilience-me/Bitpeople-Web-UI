@@ -39,7 +39,6 @@ button:disabled {
 
 .warning-message {
     color: red; /* Red for warnings */
-    font-weight: bold;
 }
 
 /* Style for the input fields */
