@@ -272,9 +272,8 @@ async function handleFunctionSelect() {
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'allowance') {
-        const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, false, true, true)} <!-- Preselector for Current and Next -->
+            ${await getPeriodSelector(false, true, true)} <!-- Preselector for Current and Next -->
             ${tokenSelectorHTML} <!-- Token selector -->
             <label for="owner">Owner Address:</label>
             <input type="text" id="owner" placeholder="Enter owner address" class="address-input">
@@ -282,16 +281,14 @@ async function handleFunctionSelect() {
             <input type="text" id="spender" placeholder="Enter spender address" class="address-input">
         `;
     } else if (selectedFunction === 'proofOfUniqueHuman') {
-        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, true, true, true)} <!-- Preselector for Previous, Current, and Next -->
+            ${await getPeriodSelector(true, true, true)} <!-- Preselector for Previous, Current, and Next -->
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'population') {
-        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, true, true, true)} <!-- Preselector for Previous, Current, and Next -->
+            ${await getPeriodSelector(true, true, true)} <!-- Preselector for Previous, Current, and Next -->
         `;
     } else if (selectedFunction === 'getPair') {
         inputFieldsDiv.innerHTML = `
@@ -304,9 +301,8 @@ async function handleFunctionSelect() {
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'registry') {
-        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Previous and Current -->
+            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
             <label for="id">Registry ID:</label>
             <input type="text" id="id" placeholder="Enter ID">
         `;
@@ -321,16 +317,14 @@ async function handleFunctionSelect() {
             <input type="text" id="t" placeholder="Enter value">
         `;
     } else if (selectedFunction === 'nym') {
-        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Previous and Current -->
+            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'toSeconds' || selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent') {
-        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, false, true, true)} <!-- Preselector for Current and Next -->
+            ${await getPeriodSelector(false, true, true)} <!-- Preselector for Current and Next -->
         `;
     }
 
