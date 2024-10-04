@@ -289,7 +289,7 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'transferFrom') {
         inputFieldsDiv.innerHTML = `
-            ${tokenSelectorHTML} <!-- Token selector -->
+            ${tokenSelectorHTML}
             <label for="from">From Address:</label>
             <input type="text" id="from" placeholder="Enter sender address" class="address-input">
             <label for="to">Recipient Address:</label>
