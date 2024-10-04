@@ -350,8 +350,9 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous, Current, and Next -->
         `;
-    }  else if (selectedFunction === 'shuffler') {
+    }  else if (selectedFunction === 'shuffler' || selectedFunction === 'court' || selectedFunction === 'commit') {
         inputFieldsDiv.innerHTML = `
+            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
@@ -360,17 +361,6 @@ async function handleFunctionSelect() {
             ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
             <label for="id">ID:</label>
             <input type="number" id="id"><br>
-        `;
-    } else if (selectedFunction === 'court') {
-        inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
-            <label for="account">Account:</label>
-            <input type="text" id="account" placeholder="Enter account address" class="address-input"><br>
-        `;
-    } else if (selectedFunction === 'commit') {
-        inputFieldsDiv.innerHTML = `
-            <label for="account">Account:</label>
-            <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'toSeconds' || selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent') {
         inputFieldsDiv.innerHTML = `
