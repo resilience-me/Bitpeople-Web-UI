@@ -459,7 +459,11 @@ async function handleTransaction() {
             const t = document.getElementById('t').value; // Get schedule
             const result = await contract.methods.registry(t).call();
             resultField.innerText = `Registry Length: ${result}`;
-        } else if (selectedFunction === 'shuffler') {
+        } else if (selectedFunction === 'shuffled') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.shuffled(t).call();
+            resultField.innerText = `Shuffled: ${result}`;
+	} else if (selectedFunction === 'shuffler') {
             const account = document.getElementById('account').value; // Get account
             const result = await contract.methods.shuffler(t, account).call();
             resultField.innerText = `Is Shuffler: ${result}`;
