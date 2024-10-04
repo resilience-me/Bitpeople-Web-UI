@@ -192,7 +192,7 @@ function clearFunctionContainer() {
     document.getElementById('inputFields').innerHTML = ''; // Clear previous inputs
     document.getElementById('result').innerText = ''; // Clear the result field
     document.getElementById('result').style.display = 'none'; // Hide the result field at the start
-	submitButton.style.display = 'none';
+    submitButton.style.display = 'none';
 }
                            
 async function handleFunctionSelect() {
