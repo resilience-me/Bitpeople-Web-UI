@@ -246,7 +246,7 @@ async function handleFunctionSelect() {
 
     // WRITE functions
     if (selectedFunction === 'register') {
-        const randomNumber = generateRandomNumber(); // Generate the random number
+        const randomNumber = generateRandomNumber();
         inputFieldsDiv.innerHTML = `
             <label for="randomNumber">Random Number (preimage):</label>
             <input type="text" id="randomNumber" placeholder="Enter random number" value="${randomNumber}" class="bytes32-input">
@@ -261,12 +261,7 @@ async function handleFunctionSelect() {
             <label for="early">Early Dispute?</label>
             <input type="checkbox" id="early">
         `;
-    } else if (selectedFunction === 'reassignNym') {
-        inputFieldsDiv.innerHTML = `
-            <label for="early">Early Reassign?</label>
-            <input type="checkbox" id="early">
-        `;
-    } else if (selectedFunction === 'reassignCourt') {
+    } else if (selectedFunction === 'reassignNym' || selectedFunction === 'reassignCourt') {
         inputFieldsDiv.innerHTML = `
             <label for="early">Early Reassign?</label>
             <input type="checkbox" id="early">
@@ -278,7 +273,7 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'transfer') {
         inputFieldsDiv.innerHTML = `
-            ${tokenSelectorHTML} <!-- Token selector comes first now -->
+            ${tokenSelectorHTML}
             <label for="to">Recipient Address:</label>
             <input type="text" id="to" placeholder="Enter recipient address" class="address-input">
             <label for="value">Value:</label>
@@ -286,7 +281,7 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'approve') {
         inputFieldsDiv.innerHTML = `
-            ${tokenSelectorHTML} <!-- Token selector comes first now -->
+            ${tokenSelectorHTML}
             <label for="spender">Spender:</label>
             <input type="text" id="spender" placeholder="Enter spender address" class="address-input">
             <label for="value">Value:</label>
@@ -306,14 +301,14 @@ async function handleFunctionSelect() {
     // READ functions
     } else if (selectedFunction === 'balanceOf') {
         inputFieldsDiv.innerHTML = `
-            ${tokenSelectorHTML} <!-- Token selector -->
+            ${tokenSelectorHTML}
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'allowance') {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(false, true, true)} <!-- Preselector for Current and Next -->
-            ${tokenSelectorHTML} <!-- Token selector -->
+            ${tokenSelectorHTML}
             <label for="owner">Owner Address:</label>
             <input type="text" id="owner" placeholder="Enter owner address" class="address-input">
             <label for="spender">Spender Address:</label>
@@ -321,13 +316,13 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'proofOfUniqueHuman') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, true)} <!-- Preselector for Previous, Current, and Next -->
+            ${await getPeriodSelector(true, true, true)}
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'population') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, true)} <!-- Preselector for Previous, Current, and Next -->
+            ${await getPeriodSelector(true, true, true)}
         `;
     } else if (selectedFunction === 'getPair') {
         inputFieldsDiv.innerHTML = `
@@ -336,35 +331,35 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'nym') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
+            ${await getPeriodSelector(true, true, false)}
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'registry') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
+            ${await getPeriodSelector(true, true, false)}
             <label for="id">Registry ID:</label>
             <input type="text" id="id" placeholder="Enter ID">
         `;
     } else if (selectedFunction === 'registryLength' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits' || selectedFunction === 'seed') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous, Current, and Next -->
+            ${await getPeriodSelector(true, true, false)}
         `;
     }  else if (selectedFunction === 'shuffler' || selectedFunction === 'court' || selectedFunction === 'commit') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
+            ${await getPeriodSelector(true, true, false)}
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'pair') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
+            ${await getPeriodSelector(true, true, false)}
             <label for="id">ID:</label>
             <input type="number" id="id"><br>
         `;
     } else if (selectedFunction === 'toSeconds' || selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(false, true, true)} <!-- Preselector for Current and Next -->
+            ${await getPeriodSelector(false, true, true)}
         `;
     }
 
