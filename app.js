@@ -273,8 +273,8 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'getPair') {
         inputFieldsDiv.innerHTML = `
-            <label for="id">Pair ID:</label>
-            <input type="text" id="id" placeholder="Enter ID"> <!-- Removed address-input class -->
+            <label for="id">Nym ID:</label>
+            <input type="text" id="id" placeholder="Enter ID">
         `;
     } else if (selectedFunction === 'commit') {
         inputFieldsDiv.innerHTML = `
