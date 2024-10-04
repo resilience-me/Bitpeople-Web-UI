@@ -281,9 +281,9 @@ async function handleFunctionSelect() {
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
     } else if (selectedFunction === 'registry') {
+        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
-            <label for="t">Period:</label>
-            <input type="text" id="t" placeholder="Enter value">
+            ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Current and Previous -->
             <label for="id">Registry ID:</label>
             <input type="text" id="id" placeholder="Enter ID">
         `;
