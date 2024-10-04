@@ -308,6 +308,13 @@ async function handleFunctionSelect() {
             <label for="preimage">Preimage:</label>
             <input type="text" id="preimage" placeholder="Enter hash preimage" class="bytes32-input">
         `;
+    } else if (selectedFunction === 'nym') {
+	const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+	inputFieldsDiv.innerHTML = `
+	    ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Previous and Current -->
+	    <label for="account">Account:</label>
+	    <input type="text" id="account" placeholder="Enter account address" class="address-input">
+	`;
     }
 
     if (selectedFunction != '') {
