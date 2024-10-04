@@ -213,9 +213,7 @@ async function handleFunctionSelect() {
             <input type="text" id="value" placeholder="Enter value (uint256)">
         `;
     } else if (selectedFunction === 'balanceOf') {
-        const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, false, true, true)} <!-- Preselector for Current and Next -->
             ${tokenSelectorHTML} <!-- Token selector -->
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
@@ -351,7 +349,7 @@ async function handleTransaction() {
             await contract.methods.approve(spender, value, token).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Approve!';
         } else if (selectedFunction === 'balanceOf') {
-            const t = document.getElementById('t').value;
+            const t = await getCurrentSchedule(); // Fetch the current schedule
             const token = document.getElementById('token').value;  // Get selected token
             const account = document.getElementById('account').value;
             const result = await contract.methods.balanceOf(t, token, account).call();
