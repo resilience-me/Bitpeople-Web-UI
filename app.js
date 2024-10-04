@@ -66,6 +66,13 @@ function setUI(account) {
     document.getElementById('notificationMessage').style.display = 'none'; // Hide network warning if previously shown
 }
 
+function clearFunctionContainer() {
+    document.getElementById('inputFields').innerHTML = ''; // Clear previous inputs
+    document.getElementById('result').innerText = ''; // Clear the result field
+    document.getElementById('result').style.display = 'none'; // Hide the result field at the start
+    submitButton.style.display = 'none';
+}
+
 function resetUI() {
     document.getElementById('connectWalletButton').style.display = 'block'; // Show the connect button
     document.getElementById('accountDisplay').style.display = 'none'; // Hide account display
@@ -182,13 +189,6 @@ function generateRandomNumber() {
         randomNumber += randomHexDigit;
     }
     return randomNumber;
-}
-
-function clearFunctionContainer() {
-    document.getElementById('inputFields').innerHTML = ''; // Clear previous inputs
-    document.getElementById('result').innerText = ''; // Clear the result field
-    document.getElementById('result').style.display = 'none'; // Hide the result field at the start
-    submitButton.style.display = 'none';
 }
                            
 async function handleFunctionSelect() {
