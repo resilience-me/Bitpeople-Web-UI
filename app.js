@@ -32,6 +32,22 @@ async function checkNetwork() {
     return remoteChainID === chainID; // Return true if the network ID matches, otherwise false
 }
 
+async function promptNetworkSwitch() {
+    document.getElementById('networkWarning').innerText = `A request is being sent to your wallet to switch to the correct network (Chain ID: ${chainID}).`;
+    document.getElementById('networkWarning').style.display = 'block';
+
+    try {
+        await addCustomNetwork(); // Try adding the custom network
+        await ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: `0x${(chainID).toString(16).toUpperCase()}` }],
+        });
+    } catch (switchError) {
+        console.error('Network switch failed:', switchError);
+        // Optionally update the UI here if needed
+    }
+}
+
 async function handleNetworkCheck(account) {
     if (await checkNetwork()) {
         return true; // Network is correct
@@ -83,23 +99,6 @@ async function connectWallet() {
         console.error('Wallet connection failed', error);
     }
 }
-
-async function promptNetworkSwitch() {
-    document.getElementById('networkWarning').innerText = `A request is being sent to your wallet to switch to the correct network (Chain ID: ${chainID}).`;
-    document.getElementById('networkWarning').style.display = 'block';
-
-    try {
-        await addCustomNetwork(); // Try adding the custom network
-        await ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: `0x${(chainID).toString(16).toUpperCase()}` }],
-        });
-    } catch (switchError) {
-        console.error('Network switch failed:', switchError);
-        // Optionally update the UI here if needed
-    }
-}
-
 
 // Fetch the ABI from the JSON file
 async function loadABI() {
