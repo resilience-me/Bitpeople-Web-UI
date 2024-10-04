@@ -26,6 +26,13 @@ button:hover {
     background-color: #45a049; /* Darker green */
 }
 
+button:disabled {
+    background-color: #cccccc; /* Light gray background */
+    color: #666666;            /* Darker gray text */
+    cursor: not-allowed;       /* Show not-allowed cursor */
+    opacity: 0.6;              /* Reduce opacity to make it look inactive */
+}
+
 /* Style for the input fields */
 input[type="text"], select {
 	display: block; 
