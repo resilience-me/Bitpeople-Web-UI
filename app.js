@@ -352,8 +352,7 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'registryLength' || selectedFunction === 'seed' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits') {
         inputFieldsDiv.innerHTML = `
-            <label for="t">Period:</label>
-            <input type="text" id="t" placeholder="Enter value">
+            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous, Current, and Next -->
         `;
     } else if (selectedFunction === 'nym') {
         inputFieldsDiv.innerHTML = `
