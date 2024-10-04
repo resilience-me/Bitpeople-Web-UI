@@ -104,6 +104,8 @@ async function connectWallet() {
         await handleAccountChange(accounts); // Use the shared function for account handling
     } catch (error) {
         console.error('Wallet connection failed', error);
+        document.getElementById('notificationMessage').innerText = 'Failed to connect to the wallet. Please try again.';
+        document.getElementById('notificationMessage').style.display = 'block';
     }
 }
 
