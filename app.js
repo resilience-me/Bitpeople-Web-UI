@@ -293,7 +293,7 @@ async function handleFunctionSelect() {
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
-    } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds' || selectedFunction === 'registryLength' || selectedFunction === 'seed' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits' ) {
+    } else if (selectedFunction === 'pseudonymEvent' || selectedFunction === 'toSeconds' || selectedFunction === 'registryLength' || selectedFunction === 'seed' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits' ) {
         inputFieldsDiv.innerHTML = `
             <label for="t">Period:</label>
             <input type="text" id="t" placeholder="Enter value">
@@ -321,6 +321,11 @@ async function handleFunctionSelect() {
 	    ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Previous and Current -->
 	    <label for="account">Account:</label>
 	    <input type="text" id="account" placeholder="Enter account address" class="address-input">
+	`;
+    } else if (selectedFunction === 'hour') {
+	const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+	inputFieldsDiv.innerHTML = `
+	    ${getPeriodSelector(currentSchedule, false, true, true)} <!-- Preselector for Current and Next -->
 	`;
     }
 
