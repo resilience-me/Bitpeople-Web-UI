@@ -465,7 +465,13 @@ async function handleTransaction() {
             const t = document.getElementById('t').value; // Get schedule
             const result = await contract.methods.pseudonymEvent(t).call();
             resultField.innerText = `Courts: ${result}`;
-        }
+        } else if (selectedFunction === 'nym') {
+	    const t = document.getElementById('t').value;
+	    const account = document.getElementById('account').value;
+	    const result = await contract.methods.nym(t, account).call();
+	    resultField.innerText = `Nym Result: ${JSON.stringify(result)}`;
+	}
+
     } catch (error) {
         console.error('Transaction failed:', error);
         resultField.innerText = 'Transaction failed: ' + error.message;
