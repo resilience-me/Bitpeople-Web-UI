@@ -334,8 +334,9 @@ async function handleFunctionSelect() {
             <label for="id">Nym ID:</label>
             <input type="text" id="id" placeholder="Enter ID">
         `;
-    } else if (selectedFunction === 'commit') {
+    } else if (selectedFunction === 'nym') {
         inputFieldsDiv.innerHTML = `
+            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
@@ -345,7 +346,11 @@ async function handleFunctionSelect() {
             <label for="id">Registry ID:</label>
             <input type="text" id="id" placeholder="Enter ID">
         `;
-    } else if (selectedFunction === 'shuffler') {
+    } else if (selectedFunction === 'registryLength' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits' || selectedFunction === 'seed') {
+        inputFieldsDiv.innerHTML = `
+            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous, Current, and Next -->
+        `;
+    }  else if (selectedFunction === 'shuffler') {
         inputFieldsDiv.innerHTML = `
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
@@ -362,13 +367,8 @@ async function handleFunctionSelect() {
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input"><br>
         `;
-    } else if (selectedFunction === 'registryLength' || selectedFunction === 'seed' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits') {
+    } else if (selectedFunction === 'commit') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous, Current, and Next -->
-        `;
-    } else if (selectedFunction === 'nym') {
-        inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
