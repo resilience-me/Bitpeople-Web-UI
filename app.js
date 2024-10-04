@@ -370,7 +370,14 @@ async function handleTransaction() {
             const value = document.getElementById('value').value;
             await contract.methods.transfer(to, value, token).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Transfer!';
-        } else if (selectedFunction === 'court') {
+        } else if (selectedFunction === 'transferFrom') {
+	    const token = document.getElementById('token').value;  // Get selected token
+	    const from = document.getElementById('from').value;
+	    const to = document.getElementById('to').value;
+	    const value = document.getElementById('value').value;
+	    await contract.methods.transferFrom(token, from, to, value).send({ from: fromAccount, gasPrice });
+	    resultField.innerText = 'Transaction successful for Transfer From!';
+	} else if (selectedFunction === 'court') {
             const t = document.getElementById('t').value;
             const account = document.getElementById('account').value;
             const result = await contract.methods.court(t, account).call();
