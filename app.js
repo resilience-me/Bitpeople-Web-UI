@@ -350,6 +350,18 @@ async function handleFunctionSelect() {
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
+    } else if (selectedFunction === 'pair') {
+        inputFieldsDiv.innerHTML = `
+            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
+            <label for="id">ID:</label>
+            <input type="number" id="id"><br>
+        `;
+    } else if (selectedFunction === 'court') {
+        inputFieldsDiv.innerHTML = `
+            ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous and Current -->
+            <label for="account">Account:</label>
+            <input type="text" id="account" placeholder="Enter account address" class="address-input"><br>
+        `;
     } else if (selectedFunction === 'registryLength' || selectedFunction === 'seed' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits') {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, false)} <!-- Preselector for Previous, Current, and Next -->
