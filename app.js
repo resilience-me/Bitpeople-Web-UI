@@ -204,19 +204,37 @@ async function handleFunctionSelect() {
     const submitButton = document.getElementById('submitButton');
     clearFunctionContainer();
 
-    if (selectedFunction === 'approve') {
+    // WRITE functions
+    if (selectedFunction === 'register') {
+        const randomNumber = generateRandomNumber(); // Generate the random number
         inputFieldsDiv.innerHTML = `
-            ${tokenSelectorHTML} <!-- Token selector comes first now -->
-            <label for="spender">Spender:</label>
-            <input type="text" id="spender" placeholder="Enter spender address" class="address-input">
-            <label for="value">Value:</label>
-            <input type="text" id="value" placeholder="Enter value (uint256)">
+            <label for="randomNumber">Random Number (preimage):</label>
+            <input type="text" id="randomNumber" placeholder="Enter random number" value="${randomNumber}" class="bytes32-input">
         `;
-    } else if (selectedFunction === 'balanceOf') {
+    } else if (selectedFunction === 'revealHash') {
         inputFieldsDiv.innerHTML = `
-            ${tokenSelectorHTML} <!-- Token selector -->
-            <label for="account">Account:</label>
-            <input type="text" id="account" placeholder="Enter account address" class="address-input">
+            <label for="preimage">Preimage:</label>
+            <input type="text" id="preimage" placeholder="Enter hash preimage" class="bytes32-input">
+        `;
+    } else if (selectedFunction === 'dispute') {
+        inputFieldsDiv.innerHTML = `
+            <label for="early">Early Dispute?</label>
+            <input type="checkbox" id="early">
+        `;
+    } else if (selectedFunction === 'reassignNym') {
+        inputFieldsDiv.innerHTML = `
+            <label for="early">Early Reassign?</label>
+            <input type="checkbox" id="early">
+        `;
+    } else if (selectedFunction === 'reassignCourt') {
+        inputFieldsDiv.innerHTML = `
+            <label for="early">Early Reassign?</label>
+            <input type="checkbox" id="early">
+        `;
+    } else if (selectedFunction === 'borderVote') {
+        inputFieldsDiv.innerHTML = `
+            <label for="target">Target:</label>
+            <input type="text" id="target" placeholder="Enter target">
         `;
     } else if (selectedFunction === 'transfer') {
         inputFieldsDiv.innerHTML = `
@@ -226,48 +244,31 @@ async function handleFunctionSelect() {
             <label for="value">Value:</label>
             <input type="text" id="value" placeholder="Enter value (uint256)">
         `;
-    } else if (selectedFunction === 'transferFrom') {
-	inputFieldsDiv.innerHTML = `
-	    ${tokenSelectorHTML} <!-- Token selector -->
-	    <label for="from">From Address:</label>
-	    <input type="text" id="from" placeholder="Enter sender address" class="address-input">
-	    <label for="to">Recipient Address:</label>
-	    <input type="text" id="to" placeholder="Enter recipient address" class="address-input">
-	    <label for="value">Value:</label>
-	    <input type="text" id="value" placeholder="Enter value (uint256)">
-	`;
-    } else if (selectedFunction === 'court') {
-        const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
+    } else if (selectedFunction === 'approve') {
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Previous and Current -->
+            ${tokenSelectorHTML} <!-- Token selector comes first now -->
+            <label for="spender">Spender:</label>
+            <input type="text" id="spender" placeholder="Enter spender address" class="address-input">
+            <label for="value">Value:</label>
+            <input type="text" id="value" placeholder="Enter value (uint256)">
+        `;
+    } else if (selectedFunction === 'transferFrom') {
+        inputFieldsDiv.innerHTML = `
+            ${tokenSelectorHTML} <!-- Token selector -->
+            <label for="from">From Address:</label>
+            <input type="text" id="from" placeholder="Enter sender address" class="address-input">
+            <label for="to">Recipient Address:</label>
+            <input type="text" id="to" placeholder="Enter recipient address" class="address-input">
+            <label for="value">Value:</label>
+            <input type="text" id="value" placeholder="Enter value (uint256)">
+        `;
+
+    // READ functions
+    } else if (selectedFunction === 'balanceOf') {
+        inputFieldsDiv.innerHTML = `
+            ${tokenSelectorHTML} <!-- Token selector -->
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
-        `;
-    } else if (selectedFunction === 'register') {
-        const randomNumber = generateRandomNumber(); // Generate the random number
-        inputFieldsDiv.innerHTML = `
-            <label for="randomNumber">Random Number (preimage):</label>
-            <input type="text" id="randomNumber" placeholder="Enter random number" value="${randomNumber}" class="bytes32-input">
-        `;
-    } else if (selectedFunction === 'reassignCourt') {
-        inputFieldsDiv.innerHTML = `
-            <label for="early">Early Reassign?</label>
-            <input type="checkbox" id="early">
-        `;
-    } else if (selectedFunction === 'reassignNym') {
-        inputFieldsDiv.innerHTML = `
-            <label for="early">Early Reassign?</label>
-            <input type="checkbox" id="early">
-        `;
-    } else if (selectedFunction === 'dispute') {
-        inputFieldsDiv.innerHTML = `
-            <label for="early">Early Dispute?</label>
-            <input type="checkbox" id="early">
-        `;
-    } else if (selectedFunction === 'borderVote') {
-        inputFieldsDiv.innerHTML = `
-            <label for="target">Target:</label>
-            <input type="text" id="target" placeholder="Enter target">
         `;
     } else if (selectedFunction === 'allowance') {
         const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
@@ -278,6 +279,18 @@ async function handleFunctionSelect() {
             <input type="text" id="owner" placeholder="Enter owner address" class="address-input">
             <label for="spender">Spender Address:</label>
             <input type="text" id="spender" placeholder="Enter spender address" class="address-input">
+        `;
+    } else if (selectedFunction === 'proofOfUniqueHuman') {
+        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+        inputFieldsDiv.innerHTML = `
+            ${getPeriodSelector(currentSchedule, true, true, true)} <!-- Preselector for Previous, Current, and Next -->
+            <label for="account">Account:</label>
+            <input type="text" id="account" placeholder="Enter account address" class="address-input">
+        `;
+    } else if (selectedFunction === 'population') {
+        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+        inputFieldsDiv.innerHTML = `
+            ${getPeriodSelector(currentSchedule, true, true, true)} <!-- Preselector for Previous, Current, and Next -->
         `;
     } else if (selectedFunction === 'getPair') {
         inputFieldsDiv.innerHTML = `
@@ -292,7 +305,7 @@ async function handleFunctionSelect() {
     } else if (selectedFunction === 'registry') {
         const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
         inputFieldsDiv.innerHTML = `
-            ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Current and Previous -->
+            ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Previous and Current -->
             <label for="id">Registry ID:</label>
             <input type="text" id="id" placeholder="Enter ID">
         `;
@@ -301,40 +314,23 @@ async function handleFunctionSelect() {
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
-    } else if (selectedFunction === 'registryLength' || selectedFunction === 'seed' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits' ) {
+    } else if (selectedFunction === 'registryLength' || selectedFunction === 'seed' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits') {
         inputFieldsDiv.innerHTML = `
             <label for="t">Period:</label>
             <input type="text" id="t" placeholder="Enter value">
         `;
-    } else if (selectedFunction === 'proofOfUniqueHuman') {
-	const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
-	inputFieldsDiv.innerHTML = `
-	    ${getPeriodSelector(currentSchedule, true, true, true)} <!-- Preselector for Previous, Current, and Next -->
+    } else if (selectedFunction === 'nym') {
+        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+        inputFieldsDiv.innerHTML = `
+            ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Previous and Current -->
             <label for="account">Account:</label>
             <input type="text" id="account" placeholder="Enter account address" class="address-input">
         `;
-    } else if (selectedFunction === 'population') {
-	const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
-	    inputFieldsDiv.innerHTML = `
-	    ${getPeriodSelector(currentSchedule, true, true, true)} <!-- Preselector for Previous, Current, and Next -->
-	`;
-    } else if (selectedFunction === 'revealHash') {
-        inputFieldsDiv.innerHTML = `
-            <label for="preimage">Preimage:</label>
-            <input type="text" id="preimage" placeholder="Enter hash preimage" class="bytes32-input">
-        `;
-    } else if (selectedFunction === 'nym') {
-	const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
-	inputFieldsDiv.innerHTML = `
-	    ${getPeriodSelector(currentSchedule, true, true, false)} <!-- Preselector for Previous and Current -->
-	    <label for="account">Account:</label>
-	    <input type="text" id="account" placeholder="Enter account address" class="address-input">
-	`;
     } else if (selectedFunction === 'toSeconds' || selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent') {
-	const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
-	inputFieldsDiv.innerHTML = `
-	    ${getPeriodSelector(currentSchedule, false, true, true)} <!-- Preselector for Current and Next -->
-	`;
+        const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+        inputFieldsDiv.innerHTML = `
+            ${getPeriodSelector(currentSchedule, false, true, true)} <!-- Preselector for Current and Next -->
+        `;
     }
 
     if (selectedFunction != '') {
