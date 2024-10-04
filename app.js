@@ -52,8 +52,7 @@ async function addCustomNetwork() {
 }
 
 async function promptNetworkSwitch() {
-    document.getElementById('notificationMessage').innerText = `A request is being sent to your wallet to switch to the correct network (Chain ID: ${chainID}).`;
-    document.getElementById('notificationMessage').style.display = 'block';
+    showNotification(`A request is being sent to your wallet to switch to the correct network (Chain ID: ${chainID}).`);
 
     try {
         await addCustomNetwork(); // Try adding the custom network
@@ -63,7 +62,6 @@ async function promptNetworkSwitch() {
         });
     } catch (switchError) {
         console.error('Network switch failed:', switchError);
-        // Optionally update the UI here if needed
     }
 }
 
@@ -89,7 +87,7 @@ function setUI(account) {
     document.getElementById('accountDisplay').innerHTML = `Connected Account: <span class="truncated-address">${account}</span>`;
     document.getElementById('accountDisplay').style.display = 'block'; // Show the account display
     document.getElementById('functionContainer').style.display = 'block'; // Show the function container
-    document.getElementById('notificationMessage').style.display = 'none'; // Hide network warning if previously shown
+    document.getElementById('messageContainer').style.display = 'none'; // Hide any previous message
 }
 
 function clearFunctionContainer() {
@@ -103,7 +101,7 @@ function resetUI() {
     document.getElementById('connectWalletButton').style.display = 'block'; // Show the connect button
     document.getElementById('accountDisplay').style.display = 'none'; // Hide account display
     document.getElementById('functionContainer').style.display = 'none'; // Hide the function container
-    document.getElementById('notificationMessage').style.display = 'none'; // Hide network warning
+    document.getElementById('messageContainer').style.display = 'none'; // Hide any previous message
     document.getElementById('functionSelect').value = ''; // Set to the default option
     clearFunctionContainer();
 }
@@ -113,13 +111,13 @@ async function handleAccountChange(accounts) {
     resetUI();  // Reset the UI first
 
     if (accounts.length > 0) {
-	const account = accounts[0];
+        const account = accounts[0];
         console.log('Connected account:', account);
         // Handle network check and update UI based on the result
         if (await handleNetworkCheck(account)) {
             setUI(account);
         } else {
-            document.getElementById('notificationMessage').innerText = `Failed to switch networks. Please refresh the page to try again.`;
+            showWarning('Failed to switch networks. Please refresh the page to try again.');
         }
     }
 }
@@ -155,6 +153,7 @@ async function loadABI() {
         return await response.json();
     } catch (error) {
         console.error('Error loading ABI:', error);
+        showWarning('Error loading contract ABI. Please try again.');
     }
 }
 
@@ -163,7 +162,7 @@ window.addEventListener('load', async () => {
     if (typeof window.ethereum !== 'undefined') {
         window.ethereum.on('accountsChanged', handleAccountChange);
 
-	document.getElementById('connectWalletButton').addEventListener('click', connectWallet);
+        document.getElementById('connectWalletButton').addEventListener('click', connectWallet);
 
         web3 = new Web3(window.ethereum);
 
@@ -177,9 +176,9 @@ window.addEventListener('load', async () => {
     } else {
         alert('No Ethereum wallet detected!');
         // Disable the Connect Wallet button and show a message
+        const connectWalletButton = document.getElementById('connectWalletButton');
         connectWalletButton.disabled = true;
-	document.getElementById('notificationMessage').innerText = 'No Ethereum wallet detected! Please install a Web3 wallet to connect.';
-	document.getElementById('notificationMessage').style.display = 'block';
+        showWarning('No Ethereum wallet detected! Please install a Web3 wallet to connect.');
     }
 
     // Add event listener for the function selector and submit button
