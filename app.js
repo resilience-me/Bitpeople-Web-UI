@@ -3,10 +3,6 @@ let contract;
 const contractAddress = '0x0000000000000000000000000000000000000010';  // Your contract address
 const chainID = 2013;  // Your custom network's chain ID as a number
 
-// Hide function selector initially
-document.getElementById('accountDisplay').style.display = 'none';  // Hide account display initially
-document.getElementById('functionContainer').style.display = 'none';  // Hide function container initially
-
 // Function to handle network addition
 async function addCustomNetwork() {
     try {
