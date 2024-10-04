@@ -130,8 +130,8 @@ window.addEventListener('load', async () => {
         alert('No Ethereum wallet detected!');
         // Disable the Connect Wallet button and show a message
         connectWalletButton.disabled = true;
-	document.getElementById('networkWarning').innerText = 'No Ethereum wallet detected! Please install a Web3 wallet to connect.';
-        document.getElementById('networkWarning').style.display = 'block';
+	document.getElementById('notificationMessage').innerText = 'No Ethereum wallet detected! Please install a Web3 wallet to connect.';
+	document.getElementById('notificationMessage').style.display = 'block';
     }
 
     // Add event listener for the function selector and submit button
