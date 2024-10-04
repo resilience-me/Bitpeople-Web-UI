@@ -60,7 +60,7 @@ function resetUI() {
     document.getElementById('functionContainer').style.display = 'none'; // Hide the function container
     document.getElementById('networkWarning').style.display = 'none'; // Hide network warning
     document.getElementById('functionSelect').value = ''; // Set to the default option
-	clearFunctionContainer();
+    clearFunctionContainer();
 }
 
 // Function to handle account changes
