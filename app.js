@@ -26,8 +26,8 @@ async function addCustomNetwork() {
 }
 
 async function promptNetworkSwitch() {
-    document.getElementById('networkWarning').innerText = `A request is being sent to your wallet to switch to the correct network (Chain ID: ${chainID}).`;
-    document.getElementById('networkWarning').style.display = 'block';
+    document.getElementById('notificationMessage').innerText = `A request is being sent to your wallet to switch to the correct network (Chain ID: ${chainID}).`;
+    document.getElementById('notificationMessage').style.display = 'block';
 
     try {
         await addCustomNetwork(); // Try adding the custom network
@@ -63,14 +63,14 @@ function setUI(account) {
     document.getElementById('accountDisplay').innerHTML = `Connected Account: <span class="truncated-address">${account}</span>`;
     document.getElementById('accountDisplay').style.display = 'block'; // Show the account display
     document.getElementById('functionContainer').style.display = 'block'; // Show the function container
-    document.getElementById('networkWarning').style.display = 'none'; // Hide network warning if previously shown
+    document.getElementById('notificationMessage').style.display = 'none'; // Hide network warning if previously shown
 }
 
 function resetUI() {
     document.getElementById('connectWalletButton').style.display = 'block'; // Show the connect button
     document.getElementById('accountDisplay').style.display = 'none'; // Hide account display
     document.getElementById('functionContainer').style.display = 'none'; // Hide the function container
-    document.getElementById('networkWarning').style.display = 'none'; // Hide network warning
+    document.getElementById('notificationMessage').style.display = 'none'; // Hide network warning
     document.getElementById('functionSelect').value = ''; // Set to the default option
     clearFunctionContainer();
 }
@@ -86,7 +86,7 @@ async function handleAccountChange(accounts) {
         if (await handleNetworkCheck(account)) {
             setUI(account);
         } else {
-            document.getElementById('networkWarning').innerText = `Failed to switch networks. Please refresh the page to try again.`;
+            document.getElementById('notificationMessage').innerText = `Failed to switch networks. Please refresh the page to try again.`;
         }
     }
 }
