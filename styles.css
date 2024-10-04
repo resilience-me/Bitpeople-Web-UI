@@ -33,6 +33,15 @@ button:disabled {
     opacity: 0.6;              /* Reduce opacity to make it look inactive */
 }
 
+.info-message {
+    color: black; /* Neutral color for information */
+}
+
+.warning-message {
+    color: red; /* Red for warnings */
+    font-weight: bold;
+}
+
 /* Style for the input fields */
 input[type="text"], select {
 	display: block; 
