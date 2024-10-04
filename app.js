@@ -352,72 +352,15 @@ async function handleTransaction() {
     try {
         const gasPrice = await web3.eth.getGasPrice(); // Fetch current gas price
 
-        if (selectedFunction === 'approve') {
-            const token = document.getElementById('token').value;  // Get token first
-            const spender = document.getElementById('spender').value;
-            const value = document.getElementById('value').value;
-            await contract.methods.approve(spender, value, token).send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for Approve!';
-        } else if (selectedFunction === 'balanceOf') {
-            const t = await getCurrentSchedule(); // Fetch the current schedule
-            const token = document.getElementById('token').value;  // Get selected token
-            const account = document.getElementById('account').value;
-            const result = await contract.methods.balanceOf(t, token, account).call();
-            resultField.innerText = `Balance: ${result}`;
-        } else if (selectedFunction === 'transfer') {
-            const token = document.getElementById('token').value;  // Get selected token first
-            const to = document.getElementById('to').value;
-            const value = document.getElementById('value').value;
-            await contract.methods.transfer(to, value, token).send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for Transfer!';
-        } else if (selectedFunction === 'transferFrom') {
-	    const token = document.getElementById('token').value;  // Get selected token
-	    const from = document.getElementById('from').value;
-	    const to = document.getElementById('to').value;
-	    const value = document.getElementById('value').value;
-	    await contract.methods.transferFrom(token, from, to, value).send({ from: fromAccount, gasPrice });
-	    resultField.innerText = 'Transaction successful for Transfer From!';
-	} else if (selectedFunction === 'court') {
-            const t = document.getElementById('t').value;
-            const account = document.getElementById('account').value;
-            const result = await contract.methods.court(t, account).call();
-            resultField.innerText = `Court Result: ${JSON.stringify(result)}`;
-        } else if (selectedFunction === 'register') {
+        // WRITE functions
+        if (selectedFunction === 'register') {
             const randomNumber = document.getElementById('randomNumber').value; // Get the random number from input
             const randomNumberHash = web3.utils.sha3('0x' + randomNumber); // Calculate the hash
             await contract.methods.register(randomNumberHash).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Register!';
-        } else if (selectedFunction === 'reassignCourt') {
-            const early = document.getElementById('early').checked;  // Boolean from checkbox
-            await contract.methods.reassignCourt(early).send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for Reassign Court!';
-        } else if (selectedFunction === 'reassignNym') {
-            const early = document.getElementById('early').checked;  // Boolean from checkbox
-            await contract.methods.reassignNym(early).send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for Reassign Nym!';
-        } else if (selectedFunction === 'allowance') {
-            const t = document.getElementById('t').value;
-            const token = document.getElementById('token').value;  // Token comes after schedule
-            const owner = document.getElementById('owner').value;
-            const spender = document.getElementById('spender').value;
-            const result = await contract.methods.allowance(t, token, owner, spender).call();
-            resultField.innerText = `Allowance: ${result}`;
-        } else if (selectedFunction === 'dispute') {
-            const early = document.getElementById('early').checked;  // Boolean from checkbox
-            await contract.methods.dispute(early).send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for Dispute!';
         } else if (selectedFunction === 'optIn') {
             await contract.methods.optIn().send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for OptIn!';
-        } else if (selectedFunction === 'nymVerified') {
-            await contract.methods.nymVerified().send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for NymVerified!';
-        } else if (selectedFunction === 'courtVerified') {
-            await contract.methods.courtVerified().send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for CourtVerified!';
-        } else if (selectedFunction === 'claimProofOfUniqueHuman') {
-            await contract.methods.claimProofOfUniqueHuman().send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for Claim Proof of Unique Human!';
+            resultField.innerText = 'Transaction successful for Opt In!';
         } else if (selectedFunction === 'shuffle') {
             await contract.methods.shuffle().send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Shuffle!';
@@ -427,22 +370,86 @@ async function handleTransaction() {
         } else if (selectedFunction === 'verify') {
             await contract.methods.verify().send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Verify!';
-        } else if (selectedFunction === 'borderVote') {
-            const target = document.getElementById('target').value;
-            await contract.methods.borderVote(target).send({ from: fromAccount, gasPrice });
-            resultField.innerText = 'Transaction successful for Border Vote!';
+        } else if (selectedFunction === 'nymVerified') {
+            await contract.methods.nymVerified().send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Nym Verified!';
+        } else if (selectedFunction === 'courtVerified') {
+            await contract.methods.courtVerified().send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Court Verified!';
         } else if (selectedFunction === 'revealHash') {
             const preimage = document.getElementById('preimage').value; // Get the preimage from input
             await contract.methods.revealHash(preimage).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Reveal Hash!';
+        } else if (selectedFunction === 'claimProofOfUniqueHuman') {
+            await contract.methods.claimProofOfUniqueHuman().send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Claim Proof-Of-Unique-Human!';
+        } else if (selectedFunction === 'dispute') {
+            const early = document.getElementById('early').checked;  // Boolean from checkbox
+            await contract.methods.dispute(early).send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Dispute!';
+        } else if (selectedFunction === 'reassignNym') {
+            const early = document.getElementById('early').checked;  // Boolean from checkbox
+            await contract.methods.reassignNym(early).send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Reassign Nym!';
+        } else if (selectedFunction === 'reassignCourt') {
+            const early = document.getElementById('early').checked;  // Boolean from checkbox
+            await contract.methods.reassignCourt(early).send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Reassign Court!';
+        } else if (selectedFunction === 'borderVote') {
+            const target = document.getElementById('target').value;
+            await contract.methods.borderVote(target).send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Border Vote!';
+        } else if (selectedFunction === 'transfer') {
+            const token = document.getElementById('token').value;  // Get selected token first
+            const to = document.getElementById('to').value;
+            const value = document.getElementById('value').value;
+            await contract.methods.transfer(to, value, token).send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Transfer!';
+        } else if (selectedFunction === 'approve') {
+            const token = document.getElementById('token').value;  // Get token first
+            const spender = document.getElementById('spender').value;
+            const value = document.getElementById('value').value;
+            await contract.methods.approve(spender, value, token).send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Approve!';
+        } else if (selectedFunction === 'transferFrom') {
+            const token = document.getElementById('token').value;  // Get selected token
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const value = document.getElementById('value').value;
+            await contract.methods.transferFrom(token, from, to, value).send({ from: fromAccount, gasPrice });
+            resultField.innerText = 'Transaction successful for Transfer From!';
+
+        // READ functions
+        } else if (selectedFunction === 'balanceOf') {
+            const t = await getCurrentSchedule(); // Fetch the current schedule
+            const token = document.getElementById('token').value;  // Get selected token
+            const account = document.getElementById('account').value;
+            const result = await contract.methods.balanceOf(t, token, account).call();
+            resultField.innerText = `Balance: ${result}`;
+        } else if (selectedFunction === 'allowance') {
+            const t = document.getElementById('t').value;
+            const token = document.getElementById('token').value;  // Token comes after schedule
+            const owner = document.getElementById('owner').value;
+            const spender = document.getElementById('spender').value;
+            const result = await contract.methods.allowance(t, token, owner, spender).call();
+            resultField.innerText = `Allowance: ${result}`;
+        } else if (selectedFunction === 'proofOfUniqueHuman') {
+            const account = document.getElementById('account').value; // Get account
+            const result = await contract.methods.proofOfUniqueHuman(t, account).call();
+            resultField.innerText = `Proof Of Unique Human: ${result}`;
+        } else if (selectedFunction === 'population') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.population(t).call();
+            resultField.innerText = `Population: ${result}`;
         } else if (selectedFunction === 'getPair') {
             const id = document.getElementById('id').value; // Get Pair ID
             const result = await contract.methods.getPair(id).call();
             resultField.innerText = `Pair ID: ${result}`;
-        } else if (selectedFunction === 'commit') {
-            const account = document.getElementById('account').value; // Get account
-            const result = await contract.methods.commit(t, account).call();
-            resultField.innerText = `Commit: ${result}`;
+        } else if (selectedFunction === 'nym') {
+            const t = document.getElementById('t').value;
+            const account = document.getElementById('account').value;
+            const result = await contract.methods.nym(t, account).call();
+            resultField.innerText = `Nym Result: ${JSON.stringify(result)}`;
         } else if (selectedFunction === 'registry') {
             const t = document.getElementById('t').value; // Get schedule
             const id = document.getElementById('id').value; // Get Registry ID
@@ -456,48 +463,41 @@ async function handleTransaction() {
             const account = document.getElementById('account').value; // Get account
             const result = await contract.methods.shuffler(t, account).call();
             resultField.innerText = `Is Shuffler: ${result}`;
-        } else if (selectedFunction === 'proofOfUniqueHuman') {
-            const account = document.getElementById('account').value; // Get account
-            const result = await contract.methods.proofOfUniqueHuman(t, account).call();
-            resultField.innerText = `Proof Of Unique Human: ${result}`;
-        } else if (selectedFunction === 'population') {
-            const t = document.getElementById('t').value; // Get schedule
-            const result = await contract.methods.population(t).call();
-            resultField.innerText = `Population: ${result}`;
         } else if (selectedFunction === 'permits') {
             const t = document.getElementById('t').value; // Get schedule
             const result = await contract.methods.permits(t).call();
             resultField.innerText = `Permits: ${result}`;
+        } else if (selectedFunction === 'commit') {
+            const account = document.getElementById('account').value; // Get account
+            const result = await contract.methods.commit(t, account).call();
+            resultField.innerText = `Commit: ${result}`;
         } else if (selectedFunction === 'seed') {
             const t = document.getElementById('t').value; // Get schedule
             const result = await contract.methods.seed(t).call();
             resultField.innerText = `Seed: ${result}`;
-        } else if (selectedFunction === 'hour') {
+        
+        // SCHEDULE functions
+        } else if (selectedFunction === 'schedule') {
             const t = document.getElementById('t').value; // Get schedule
-            const result = await contract.methods.hour(t).call();
-            resultField.innerText = `Hour: ${result}`;
-        } else if (selectedFunction === 'quarter') {
-	    const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
-            const result = await contract.methods.quarter(currentSchedule).call();
-            resultField.innerText = `Quarter: ${result}`;
+            const result = await contract.methods.schedule(t).call();
+            resultField.innerText = `Schedule: ${result}`;
         } else if (selectedFunction === 'toSeconds') {
             const t = document.getElementById('t').value; // Get schedule
             const result = await contract.methods.toSeconds(t).call();
             resultField.innerText = `To Seconds: ${result}`;
+        } else if (selectedFunction === 'quarter') {
+            const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
+            const result = await contract.methods.quarter(currentSchedule).call();
+            resultField.innerText = `Quarter: ${result}`;
+        } else if (selectedFunction === 'hour') {
+            const t = document.getElementById('t').value; // Get schedule
+            const result = await contract.methods.hour(t).call();
+            resultField.innerText = `Hour: ${result}`;
         } else if (selectedFunction === 'pseudonymEvent') {
             const t = document.getElementById('t').value; // Get schedule
             const result = await contract.methods.pseudonymEvent(t).call();
             resultField.innerText = `Pseudonym Event: ${result}`;
-        } else if (selectedFunction === 'courts') {
-            const t = document.getElementById('t').value; // Get schedule
-            const result = await contract.methods.pseudonymEvent(t).call();
-            resultField.innerText = `Courts: ${result}`;
-        } else if (selectedFunction === 'nym') {
-	    const t = document.getElementById('t').value;
-	    const account = document.getElementById('account').value;
-	    const result = await contract.methods.nym(t, account).call();
-	    resultField.innerText = `Nym Result: ${JSON.stringify(result)}`;
-	}
+        }
 
     } catch (error) {
         console.error('Transaction failed:', error);
