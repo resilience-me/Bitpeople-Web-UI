@@ -257,7 +257,7 @@ async function handleFunctionSelect() {
     } else if (selectedFunction === 'borderVote') {
         inputFieldsDiv.innerHTML = `
             <label for="target">Target:</label>
-            <input type="text" id="target" placeholder="Enter target" class="address-input">
+            <input type="text" id="target" placeholder="Enter target">
         `;
     } else if (selectedFunction === 'allowance') {
         const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
