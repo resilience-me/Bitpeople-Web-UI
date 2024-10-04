@@ -68,7 +68,7 @@ async function handleAccountChange(accounts) {
     resetUI();  // Reset the UI first
 
     if (accounts.length > 0) {
-		const account = accounts[0];
+	const account = accounts[0];
         console.log('Connected account:', account);
         // Handle network check and update UI based on the result
         if (await handleNetworkCheck(account)) {
@@ -79,13 +79,16 @@ async function handleAccountChange(accounts) {
     }
 }
 
-// Wallet connection logic
 async function connectWallet() {
-    try {
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        await handleAccountChange(accounts); // Use the shared function for account handling
-    } catch (error) {
-        console.error('Wallet connection failed', error);
+    if (typeof window.ethereum !== 'undefined') {
+        try {
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            await handleAccountChange(accounts); // Use the shared function for account handling
+        } catch (error) {
+            console.error('Wallet connection failed', error);
+        }
+    } else {
+        alert('No Ethereum wallet detected!');
     }
 }
 
@@ -105,14 +108,7 @@ async function promptNetworkSwitch() {
     }
 }
 
-document.getElementById('connectWalletButton').addEventListener('click', async () => {
-    if (typeof window.ethereum !== 'undefined') {
-        web3 = new Web3(window.ethereum);
-        await connectWallet();
-    } else {
-        alert('No Ethereum wallet detected!');
-    }
-});
+document.getElementById('connectWalletButton').addEventListener('click', connectWallet);
 
 // Fetch the ABI from the JSON file
 async function loadABI() {
