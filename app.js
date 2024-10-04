@@ -80,12 +80,12 @@ async function handleAccountChange(accounts) {
 }
 
 async function connectWallet() {
-        try {
-            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            await handleAccountChange(accounts); // Use the shared function for account handling
-        } catch (error) {
-            console.error('Wallet connection failed', error);
-        }
+    try {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        await handleAccountChange(accounts); // Use the shared function for account handling
+    } catch (error) {
+        console.error('Wallet connection failed', error);
+    }
 }
 
 async function promptNetworkSwitch() {
