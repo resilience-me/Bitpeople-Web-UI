@@ -41,17 +41,9 @@ button:disabled {
     color: red; /* Red for warnings */
 }
 
-.account-container {
-    display: block; /* Block display */
-    width: auto; /* Width auto */
-    margin: 0 auto; /* Center the container */
-}
-
-.separator {
-    height: 2px; /* Thickness of the line */
-    background-color: #ccc; /* Color of the line */
-    margin: 20px 0; /* Space around the line */
-    width: 100%; /* Make it take the full width of the container */
+#accountDisplay {
+    border-bottom: 2px solid #ccc; /* Line under the text */
+    padding-bottom: 10px; /* Space between the text and the line */
 }
 
 /* Style for text and number input fields */
