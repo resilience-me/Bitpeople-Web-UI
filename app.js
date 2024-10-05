@@ -338,11 +338,11 @@ async function handleFunctionSelect() {
             <label for="id">ID:</label>
             <input type="number" id="id" min="0" placeholder="Enter pair ID (uint256)">
         `;
-    } else if (selectedFunction === 'toSeconds' || selectedFunction === 'hour') {
+    } else if (selectedFunction === 'toSeconds') {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(false, true, true)}
         `;
-    } else if (selectedFunction === 'pseudonymEvent') {
+    } else if (selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent') {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(false, true, true)}
 	`;
