@@ -42,6 +42,7 @@ button:disabled {
 }
 
 #accountDisplay {
+    display: inline-block; /* Make the span only take as much width as the text */
     border-bottom: 2px solid #ccc; /* Line under the text */
     padding-bottom: 10px; /* Space between the text and the line */
 }
