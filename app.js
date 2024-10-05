@@ -27,7 +27,6 @@ function showWarning(message) {
     messageContainer.style.display = 'block';
 }
 
-// Function to handle network addition
 async function addCustomNetwork() {
     try {
         await ethereum.request({
