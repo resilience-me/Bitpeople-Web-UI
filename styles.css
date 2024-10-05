@@ -42,7 +42,8 @@ button:disabled {
 }
 
 .account-container {
-    display: inline-block; /* Allows the div to shrink to fit its content */
+    display: block; /* Block display */
+    width: auto; /* Width auto */
     margin: 0 auto; /* Center the container */
 }
 
