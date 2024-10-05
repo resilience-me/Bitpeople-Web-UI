@@ -336,7 +336,7 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, false)}
             <label for="id">ID:</label>
-            <input type="number" id="id"><br>
+            <input type="number" id="id" min="0" placeholder="Enter pair ID (uint256)">
         `;
     } else if (selectedFunction === 'toSeconds' || selectedFunction === 'hour' || selectedFunction === 'pseudonymEvent') {
         inputFieldsDiv.innerHTML = `
