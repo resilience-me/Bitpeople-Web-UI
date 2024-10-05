@@ -314,7 +314,7 @@ async function handleFunctionSelect() {
     } else if (selectedFunction === 'getPair') {
         inputFieldsDiv.innerHTML = `
             <label for="id">Nym ID:</label>
-            <input type="text" id="id" placeholder="Enter ID">
+            <input type="number" id="id" min="0" placeholder="Enter ID (uint256)">
         `;
     } else if (selectedFunction === 'nym' || selectedFunction === 'shuffler' || selectedFunction === 'court' || selectedFunction === 'commit') {
         inputFieldsDiv.innerHTML = `
