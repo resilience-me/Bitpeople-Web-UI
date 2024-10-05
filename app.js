@@ -1,32 +1,30 @@
 let web3;
 let contract;
-const contractAddress = '0x0000000000000000000000000000000000000010';  // Your contract address
-const chainID = 2013;  // Your custom network's chain ID as a number
+const contractAddress = '0x0000000000000000000000000000000000000010';
+const chainID = 2013;
 
-// Function to write a notification message
 function showNotification(message) {
     const messageContainer = document.getElementById('messageContainer');
-    messageContainer.innerHTML = ''; // Clear previous messages
+    messageContainer.innerHTML = '';
 
     const notificationDiv = document.createElement('div');
-    notificationDiv.className = 'info-message'; // Class for informational messages
+    notificationDiv.className = 'info-message';
     notificationDiv.innerText = message;
 
     messageContainer.appendChild(notificationDiv);
-    messageContainer.style.display = 'block'; // Show the container
+    messageContainer.style.display = 'block';
 }
 
-// Function to write a warning message
 function showWarning(message) {
     const messageContainer = document.getElementById('messageContainer');
-    messageContainer.innerHTML = ''; // Clear previous messages
+    messageContainer.innerHTML = '';
 
     const warningDiv = document.createElement('div');
-    warningDiv.className = 'warning-message'; // Class for warning messages
+    warningDiv.className = 'warning-message';
     warningDiv.innerText = message;
 
     messageContainer.appendChild(warningDiv);
-    messageContainer.style.display = 'block'; // Show the container
+    messageContainer.style.display = 'block';
 }
 
 // Function to handle network addition
@@ -37,13 +35,13 @@ async function addCustomNetwork() {
             params: [{
                 chainId: `0x${chainID.toString(16).toUpperCase()}`, // Convert chainID to hex string
                 chainName: 'Panarchy',
-                rpcUrls: ['https://polytopia.org:8545'], // Your custom RPC URL
+                rpcUrls: ['https://polytopia.org:8545'],
                 nativeCurrency: {
                     name: 'GAS',
-                    symbol: 'GAS', // Your currency symbol
+                    symbol: 'GAS',
                     decimals: 18,
                 },
-                blockExplorerUrls: ['https://scan.polytopia.org'], // Your updated block explorer URL
+                blockExplorerUrls: ['https://scan.polytopia.org'],
             }],
         });
     } catch (addError) {
@@ -65,55 +63,52 @@ async function promptNetworkSwitch() {
     }
 }
 
-// Function to check the network ID
 async function checkNetwork() {
     const remoteChainID = Number(await web3.eth.getChainId());
-    console.log('Current Chain ID:', remoteChainID); // Log for debugging
-    return remoteChainID === chainID; // Return true if the network ID matches, otherwise false
+    console.log('Current Chain ID:', remoteChainID);
+    return remoteChainID === chainID;
 }
 
 async function handleNetworkCheck(account) {
     if (await checkNetwork()) {
-        return true; // Network is correct
+        return true;
     }
     
-    await promptNetworkSwitch(); // Prompt to switch networks
+    await promptNetworkSwitch();
     // Check the network again after prompting the user
-    return await checkNetwork(); // Return the result of the check
+    return await checkNetwork();
 }
 
 function setUI(account) {
-    document.getElementById('connectWalletButton').style.display = 'none'; // Hide the connect button
+    document.getElementById('connectWalletButton').style.display = 'none';
     document.getElementById('accountDisplay').innerHTML = `Connected Account: <span class="truncated-address">${account}</span>`;
-    document.getElementById('accountDisplay').style.display = 'block'; // Show the account display
-    document.getElementById('functionContainer').style.display = 'block'; // Show the function container
-    document.getElementById('messageContainer').style.display = 'none'; // Hide any previous message
+    document.getElementById('accountDisplay').style.display = 'block';
+    document.getElementById('functionContainer').style.display = 'block';
+    document.getElementById('messageContainer').style.display = 'none';
 }
 
 function clearFunctionContainer() {
-    document.getElementById('inputFields').innerHTML = ''; // Clear previous inputs
-    document.getElementById('result').innerText = ''; // Clear the result field
-    document.getElementById('result').style.display = 'none'; // Hide the result field at the start
+    document.getElementById('inputFields').innerHTML = '';
+    document.getElementById('result').innerText = '';
+    document.getElementById('result').style.display = 'none';
     submitButton.style.display = 'none';
 }
 
 function resetUI() {
-    document.getElementById('connectWalletButton').style.display = 'block'; // Show the connect button
-    document.getElementById('accountDisplay').style.display = 'none'; // Hide account display
-    document.getElementById('functionContainer').style.display = 'none'; // Hide the function container
-    document.getElementById('messageContainer').style.display = 'none'; // Hide any previous message
-    document.getElementById('functionSelect').value = ''; // Set to the default option
+    document.getElementById('connectWalletButton').style.display = 'block';
+    document.getElementById('accountDisplay').style.display = 'none';
+    document.getElementById('functionContainer').style.display = 'none';
+    document.getElementById('messageContainer').style.display = 'none';
+    document.getElementById('functionSelect').value = '';
     clearFunctionContainer();
 }
 
-// Function to handle account changes
 async function handleAccountChange(accounts) {
-    resetUI();  // Reset the UI first
+    resetUI();
 
     if (accounts.length > 0) {
         const account = accounts[0];
         console.log('Connected account:', account);
-        // Handle network check and update UI based on the result
         if (await handleNetworkCheck(account)) {
             setUI(account);
         } else {
@@ -129,35 +124,32 @@ async function connectWallet() {
     isConnecting = true;
 
     const connectWalletButton = document.getElementById('connectWalletButton');
-    connectWalletButton.disabled = true; // Disable button during connection attempt
+    connectWalletButton.disabled = true;
 
-    // Show notification when request is sent to the wallet
     showNotification('Sent request to wallet to login...');
 
     try {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        await handleAccountChange(accounts); // Use the shared function for account handling
+        await handleAccountChange(accounts);
     } catch (error) {
         console.error('Wallet connection failed', error);
         showWarning('Failed to connect to the wallet. Please try again.');
     } finally {
         isConnecting = false;
-        connectWalletButton.disabled = false; // Re-enable button after connection attempt
+        connectWalletButton.disabled = false;
     }
 }
 
-// Fetch the ABI from the JSON file
 async function loadABI() {
     try {
         const response = await fetch('abi.json');
         return await response.json();
     } catch (error) {
         console.error('Error loading ABI:', error);
-        return null; // Explicitly return null if loading fails
+        return null;
     }
 }
 
-// On page load
 window.addEventListener('load', async () => {
     const connectWalletButton = document.getElementById('connectWalletButton');
 
@@ -168,16 +160,13 @@ window.addEventListener('load', async () => {
 
         web3 = new Web3(window.ethereum);
 
-        // Load the ABI and check if it succeeded
         const contractABI = await loadABI();
         if (contractABI) {
             contract = new web3.eth.Contract(contractABI, contractAddress);
 
-            // Proceed with connecting accounts if ABI is loaded
             const accounts = await web3.eth.getAccounts();
-            await handleAccountChange(accounts); // Call the shared function if an account is already connected
+            await handleAccountChange(accounts);
         } else {
-            // Disable functionality if ABI fails to load
             connectWalletButton.disabled = true;
             showWarning('Unable to load contract ABI.');
         }
@@ -188,7 +177,6 @@ window.addEventListener('load', async () => {
         showWarning('No Ethereum wallet detected! Please install a Web3 wallet to connect.');
     }
 
-    // Add event listener for the function selector and submit button
     document.getElementById('functionSelect').addEventListener('change', handleFunctionSelect);
     document.getElementById('submitButton').addEventListener('click', handleTransaction);
 });
@@ -210,7 +198,7 @@ async function getCurrentSchedule() {
 }
 
 async function getPeriodSelector(includePrevious, includeCurrent, includeNext) {
-    const currentSchedule = await getCurrentSchedule();  // Fetch the current schedule
+    const currentSchedule = await getCurrentSchedule();
     let options = `<label for="t">Select Period:</label><select id="t">`;
 
     // Only include Previous if currentSchedule is greater than 0
@@ -218,7 +206,7 @@ async function getPeriodSelector(includePrevious, includeCurrent, includeNext) {
         options += `<option value="${currentSchedule - 1}">Previous</option>`;
     }
     if (includeCurrent) {
-        options += `<option value="${currentSchedule}" selected>Current</option>`;  // Default to Current
+        options += `<option value="${currentSchedule}" selected>Current</option>`;
     }
     if (includeNext) {
         options += `<option value="${currentSchedule + 1}">Next</option>`;
@@ -365,15 +353,15 @@ async function handleTransaction() {
     const selectedFunction = document.getElementById('functionSelect').value;
     const accounts = await web3.eth.getAccounts();
     const fromAccount = accounts[0];
-    const resultField = document.getElementById('result'); // Constant for the result field
+    const resultField = document.getElementById('result');
 
     try {
-        const gasPrice = await web3.eth.getGasPrice(); // Fetch current gas price
+        const gasPrice = await web3.eth.getGasPrice();
 
         // WRITE functions
         if (selectedFunction === 'register') {
-            const randomNumber = document.getElementById('randomNumber').value; // Get the random number from input
-            const randomNumberHash = web3.utils.sha3('0x' + randomNumber); // Calculate the hash
+            const randomNumber = document.getElementById('randomNumber').value;
+            const randomNumberHash = web3.utils.sha3('0x' + randomNumber);
             await contract.methods.register(randomNumberHash).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Register!';
         } else if (selectedFunction === 'optIn') {
@@ -395,22 +383,22 @@ async function handleTransaction() {
             await contract.methods.courtVerified().send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Court Verified!';
         } else if (selectedFunction === 'revealHash') {
-            const preimage = document.getElementById('preimage').value; // Get the preimage from input
+            const preimage = document.getElementById('preimage').value;
             await contract.methods.revealHash(preimage).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Reveal Hash!';
         } else if (selectedFunction === 'claimProofOfUniqueHuman') {
             await contract.methods.claimProofOfUniqueHuman().send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Claim Proof-Of-Unique-Human!';
         } else if (selectedFunction === 'dispute') {
-            const early = document.getElementById('early').checked;  // Boolean from checkbox
+            const early = document.getElementById('early').checked;
             await contract.methods.dispute(early).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Dispute!';
         } else if (selectedFunction === 'reassignNym') {
-            const early = document.getElementById('early').checked;  // Boolean from checkbox
+            const early = document.getElementById('early').checked;
             await contract.methods.reassignNym(early).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Reassign Nym!';
         } else if (selectedFunction === 'reassignCourt') {
-            const early = document.getElementById('early').checked;  // Boolean from checkbox
+            const early = document.getElementById('early').checked;
             await contract.methods.reassignCourt(early).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Reassign Court!';
         } else if (selectedFunction === 'borderVote') {
@@ -418,19 +406,19 @@ async function handleTransaction() {
             await contract.methods.borderVote(target).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Border Vote!';
         } else if (selectedFunction === 'transfer') {
-            const token = document.getElementById('token').value;  // Get selected token first
+            const token = document.getElementById('token').value;
             const to = document.getElementById('to').value;
             const value = document.getElementById('value').value;
             await contract.methods.transfer(to, value, token).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Transfer!';
         } else if (selectedFunction === 'approve') {
-            const token = document.getElementById('token').value;  // Get token first
+            const token = document.getElementById('token').value;
             const spender = document.getElementById('spender').value;
             const value = document.getElementById('value').value;
             await contract.methods.approve(spender, value, token).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Approve!';
         } else if (selectedFunction === 'transferFrom') {
-            const token = document.getElementById('token').value;  // Get selected token
+            const token = document.getElementById('token').value;
             const from = document.getElementById('from').value;
             const to = document.getElementById('to').value;
             const value = document.getElementById('value').value;
@@ -439,28 +427,28 @@ async function handleTransaction() {
 
         // READ functions
         } else if (selectedFunction === 'balanceOf') {
-            const t = await getCurrentSchedule(); // Fetch the current schedule
-            const token = document.getElementById('token').value;  // Get selected token
+            const t = await getCurrentSchedule();
+            const token = document.getElementById('token').value;
             const account = document.getElementById('account').value;
             const result = await contract.methods.balanceOf(t, token, account).call();
             resultField.innerText = `Balance: ${result}`;
         } else if (selectedFunction === 'allowance') {
-            const t = await getCurrentSchedule(); // Fetch the current schedule
-            const token = document.getElementById('token').value;  // Token comes after schedule
+            const t = await getCurrentSchedule();
+            const token = document.getElementById('token').value;
             const owner = document.getElementById('owner').value;
             const spender = document.getElementById('spender').value;
             const result = await contract.methods.allowance(t, token, owner, spender).call();
             resultField.innerText = `Allowance: ${result}`;
         } else if (selectedFunction === 'proofOfUniqueHuman') {
-            const account = document.getElementById('account').value; // Get account
+            const account = document.getElementById('account').value;
             const result = await contract.methods.proofOfUniqueHuman(t, account).call();
             resultField.innerText = `Proof Of Unique Human: ${result}`;
         } else if (selectedFunction === 'population') {
-            const t = document.getElementById('t').value; // Get schedule
+            const t = document.getElementById('t').value;
             const result = await contract.methods.population(t).call();
             resultField.innerText = `Population: ${result}`;
         } else if (selectedFunction === 'getPair') {
-            const id = document.getElementById('id').value; // Get Pair ID
+            const id = document.getElementById('id').value;
             const result = await contract.methods.getPair(id).call();
             resultField.innerText = `Pair ID: ${result}`;
         } else if (selectedFunction === 'nym') {
@@ -469,54 +457,54 @@ async function handleTransaction() {
             const result = await contract.methods.nym(t, account).call();
             resultField.innerText = `Nym Result: ${JSON.stringify(result)}`;
         } else if (selectedFunction === 'registry') {
-            const t = document.getElementById('t').value; // Get schedule
-            const id = document.getElementById('id').value; // Get Registry ID
+            const t = document.getElementById('t').value;
+            const id = document.getElementById('id').value;
             const result = await contract.methods.registry(t, id).call();
             resultField.innerText = `Registry Address: ${result}`;
         } else if (selectedFunction === 'registryLength') {
-            const t = document.getElementById('t').value; // Get schedule
+            const t = document.getElementById('t').value;
             const result = await contract.methods.registry(t).call();
             resultField.innerText = `Registry Length: ${result}`;
         } else if (selectedFunction === 'shuffled') {
-            const t = document.getElementById('t').value; // Get schedule
+            const t = document.getElementById('t').value;
             const result = await contract.methods.shuffled(t).call();
             resultField.innerText = `Shuffled: ${result}`;
 	} else if (selectedFunction === 'shuffler') {
-            const account = document.getElementById('account').value; // Get account
+            const account = document.getElementById('account').value;
             const result = await contract.methods.shuffler(t, account).call();
             resultField.innerText = `Is Shuffler: ${result}`;
         } else if (selectedFunction === 'permits') {
-            const t = document.getElementById('t').value; // Get schedule
+            const t = document.getElementById('t').value;
             const result = await contract.methods.permits(t).call();
             resultField.innerText = `Permits: ${result}`;
         } else if (selectedFunction === 'commit') {
-            const account = document.getElementById('account').value; // Get account
+            const account = document.getElementById('account').value;
             const result = await contract.methods.commit(t, account).call();
             resultField.innerText = `Commit: ${result}`;
         } else if (selectedFunction === 'seed') {
-            const t = document.getElementById('t').value; // Get schedule
+            const t = document.getElementById('t').value;
             const result = await contract.methods.seed(t).call();
             resultField.innerText = `Seed: ${result}`;
         
         // SCHEDULE functions
         } else if (selectedFunction === 'schedule') {
-            const t = document.getElementById('t').value; // Get schedule
+            const t = document.getElementById('t').value;
             const result = await contract.methods.schedule(t).call();
             resultField.innerText = `Schedule: ${result}`;
         } else if (selectedFunction === 'toSeconds') {
-            const t = document.getElementById('t').value; // Get schedule
+            const t = document.getElementById('t').value;
             const result = await contract.methods.toSeconds(t).call();
             resultField.innerText = `To Seconds: ${result}`;
         } else if (selectedFunction === 'quarter') {
-            const currentSchedule = await getCurrentSchedule(); // Fetch the current schedule
+            const currentSchedule = await getCurrentSchedule();
             const result = await contract.methods.quarter(currentSchedule).call();
             resultField.innerText = `Quarter: ${result}`;
         } else if (selectedFunction === 'hour') {
-            const t = document.getElementById('t').value; // Get schedule
+            const t = document.getElementById('t').value;
             const result = await contract.methods.hour(t).call();
             resultField.innerText = `Hour: ${result}`;
         } else if (selectedFunction === 'pseudonymEvent') {
-            const t = document.getElementById('t').value; // Get schedule
+            const t = document.getElementById('t').value;
             const result = await contract.methods.pseudonymEvent(t).call();
             resultField.innerText = `Pseudonym Event: ${result}`;
         }
@@ -525,5 +513,5 @@ async function handleTransaction() {
         console.error('Transaction failed:', error);
         resultField.innerText = 'Transaction failed: ' + error.message;
     }
-    resultField.style.display = 'block'; // Show the result field
+    resultField.style.display = 'block';
 }
