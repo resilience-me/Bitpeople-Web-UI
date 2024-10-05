@@ -41,8 +41,8 @@ button:disabled {
     color: red; /* Red for warnings */
 }
 
-/* Style for the input fields */
-input[type="text"], select {
+/* Style for text and number input fields */
+input[type="text"], input[type="number"], select {
 	display: block; 
     padding: 10px;
     margin: 8px 0;
