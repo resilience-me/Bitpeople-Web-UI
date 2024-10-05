@@ -174,7 +174,6 @@ window.addEventListener('load', async () => {
             showWarning('Unable to load contract ABI.');
         }
     } else {
-        alert('No Ethereum wallet detected!');
         connectWalletButton.disabled = true;
         showWarning('No Ethereum wallet detected! Please install a Web3 wallet to connect.');
     }
