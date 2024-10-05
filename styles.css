@@ -45,6 +45,15 @@ button:disabled {
     margin-bottom: 20px; /* Adjust the value as needed */
 }
 
+.truncated-address {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+}
+
 /* Style for text and number input fields */
 input[type="text"], input[type="number"], select {
 	display: block; 
@@ -74,13 +83,4 @@ input[type="text"], input[type="number"], select {
 .bytes32-input {
     width: 68ch; /* Set a specific width for address fields */
     max-width: 100%; /* Prevent it from exceeding the container */
-}
-
-.truncated-address, .truncated-hex {
-    display: inline-block;
-    max-width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    vertical-align: middle;
-    text-overflow: ellipsis;
 }
