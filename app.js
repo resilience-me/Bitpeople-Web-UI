@@ -282,7 +282,7 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${tokenSelectorHTML}
             <label for="from">From Address:</label>
-            <input type="text" id="from" placeholder="Enter sender address" class="address-input">
+            <input type="text" id="from" placeholder="Enter sender address" class="address-input" value="${walletAccount}">
             <label for="to">Recipient Address:</label>
             <input type="text" id="to" placeholder="Enter recipient address" class="address-input">
             <label for="value">Value:</label>
@@ -308,7 +308,7 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, true)}
             <label for="account">Account:</label>
-            <input type="text" id="account" placeholder="Enter account address" class="address-input">
+            <input type="text" id="account" placeholder="Enter account address" class="address-input" value="${walletAccount}">
         `;
     } else if (selectedFunction === 'population') {
         inputFieldsDiv.innerHTML = `
