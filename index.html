@@ -5,25 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitpeople User Interface</title>
     <link rel="icon" href="data:image/x-icon;," type="image/x-icon">
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
-    <style>
-        .hidden { display: none; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Connect Wallet Button -->
     <button id="connectWalletButton">Connect Wallet</button>
 
-    <!-- Account Display -->
-    <div id="accountDisplay" style="display: none;"></div>
+    <div class="account-container">
+        <div id="accountDisplay"></div>
+        <div class="separator"></div>
+    </div>
 
-    <hr>
-
-    <!-- Notifications to user -->
     <div id="messageContainer" style="display: none;"></div>
 
-    <!-- Dropdown Menu for Contract Functions -->
-    <div id="functionContainer" style="display: none;"> <!-- Wrapper for label and select -->
+    <div id="functionContainer" style="display: none;">
         <label for="functionSelect">Select a function:</label>
         <select id="functionSelect">
             <option value="">--Select Function--</option>
@@ -73,17 +67,13 @@
             </optgroup>
         </select>
 
-        <!-- Dynamic Input Fields Section -->
         <div id="inputFields"></div>
 
-        <!-- Submit Button -->
         <button id="submitButton" style="display: none">Submit</button>
       
-        <!-- Display the result of the transaction or call -->
         <div id="result" style="display: none"></div>
     </div>
 
-    <!-- Web3.js from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="app.js"></script>
 </body>
