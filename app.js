@@ -27,12 +27,16 @@ function showWarning(message) {
     messageContainer.style.display = 'block';
 }
 
+function convertNumberToHexString(number) {
+    return `0x${number.toString(16).toUpperCase()}`;
+}
+
 async function addCustomNetwork() {
     try {
         await ethereum.request({
             method: 'wallet_addEthereumChain',
             params: [{
-                chainId: `0x${chainID.toString(16).toUpperCase()}`, // Convert chainID to hex string
+                chainId: convertNumberToHexString(chainID),
                 chainName: 'Panarchy',
                 rpcUrls: ['https://polytopia.org:8545'],
                 nativeCurrency: {
@@ -55,7 +59,7 @@ async function promptNetworkSwitch() {
         await addCustomNetwork(); // Try adding the custom network
         await ethereum.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: `0x${(chainID).toString(16).toUpperCase()}` }],
+            params: [{ chainId: convertNumberToHexString(chainID) }],
         });
     } catch (switchError) {
         console.error('Network switch failed:', switchError);
