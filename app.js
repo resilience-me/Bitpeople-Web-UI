@@ -265,7 +265,7 @@ async function handleFunctionSelect() {
             <label for="to">Recipient Address:</label>
             <input type="text" id="to" placeholder="Enter recipient address" class="address-input">
             <label for="value">Value:</label>
-            <input type="text" id="value" placeholder="Enter value (uint256)">
+            <input type="number" id="value" min="0" placeholder="Enter value (uint256)">
         `;
     } else if (selectedFunction === 'approve') {
         inputFieldsDiv.innerHTML = `
@@ -273,7 +273,7 @@ async function handleFunctionSelect() {
             <label for="spender">Spender:</label>
             <input type="text" id="spender" placeholder="Enter spender address" class="address-input">
             <label for="value">Value:</label>
-            <input type="text" id="value" placeholder="Enter value (uint256)">
+            <input type="number" id="value" min="0" placeholder="Enter value (uint256)">
         `;
     } else if (selectedFunction === 'transferFrom') {
         inputFieldsDiv.innerHTML = `
@@ -283,7 +283,7 @@ async function handleFunctionSelect() {
             <label for="to">Recipient Address:</label>
             <input type="text" id="to" placeholder="Enter recipient address" class="address-input">
             <label for="value">Value:</label>
-            <input type="text" id="value" placeholder="Enter value (uint256)">
+            <input type="number" id="value" min="0" placeholder="Enter value (uint256)">
         `;
 
     // READ functions
