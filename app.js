@@ -307,7 +307,6 @@ async function handleFunctionSelect() {
         `;
     } else if (selectedFunction === 'allowance') {
         inputFieldsDiv.innerHTML = `
-            ${await getPeriodSelector(false, true, true)} <!-- Preselector for Current and Next -->
             ${tokenSelectorHTML}
             <label for="owner">Owner Address:</label>
             <input type="text" id="owner" placeholder="Enter owner address" class="address-input">
@@ -447,7 +446,7 @@ async function handleTransaction() {
             const result = await contract.methods.balanceOf(t, token, account).call();
             resultField.innerText = `Balance: ${result}`;
         } else if (selectedFunction === 'allowance') {
-            const t = document.getElementById('t').value;
+            const t = await getCurrentSchedule(); // Fetch the current schedule
             const token = document.getElementById('token').value;  // Token comes after schedule
             const owner = document.getElementById('owner').value;
             const spender = document.getElementById('spender').value;
