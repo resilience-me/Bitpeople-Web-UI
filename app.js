@@ -327,7 +327,7 @@ async function handleFunctionSelect() {
             <label for="id">Nym ID:</label>
             <input type="text" id="id" placeholder="Enter ID">
         `;
-    } else if (selectedFunction === 'nym ' || selectedFunction === 'shuffler' || selectedFunction === 'court' || selectedFunction === 'commit') {
+    } else if (selectedFunction === 'nym' || selectedFunction === 'shuffler' || selectedFunction === 'court' || selectedFunction === 'commit') {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, false)}
             <label for="account">Account:</label>
