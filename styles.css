@@ -41,11 +41,11 @@ button:disabled {
     color: red; /* Red for warnings */
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background: #ccc; /* Light gray color */
-    margin: 20px 0; /* Spacing above and below */
+.separator {
+    height: 2px; /* Thickness of the line */
+    background-color: #ccc; /* Color of the line */
+    margin: 20px 0; /* Space around the line */
+    width: 100%; /* Make it take the full width of the container */
 }
 
 /* Style for text and number input fields */
