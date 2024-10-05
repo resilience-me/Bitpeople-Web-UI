@@ -282,7 +282,7 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${tokenSelectorHTML}
             <label for="from">From Address:</label>
-            <input type="text" id="from" placeholder="Enter sender address" class="address-input" value="${walletAccount}">
+            <input type="text" id="from" placeholder="Enter sender address" class="address-input">
             <label for="to">Recipient Address:</label>
             <input type="text" id="to" placeholder="Enter recipient address" class="address-input">
             <label for="value">Value:</label>
