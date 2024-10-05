@@ -232,6 +232,9 @@ async function handleFunctionSelect() {
     const submitButton = document.getElementById('submitButton');
     clearFunctionContainer();
 
+    const accounts = await web3.eth.getAccounts();
+    const walletAccount = accounts[0];
+
     // WRITE functions
     if (selectedFunction === 'register') {
         const randomNumber = generateRandomNumber();
@@ -291,7 +294,7 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${tokenSelectorHTML}
             <label for="account">Account:</label>
-            <input type="text" id="account" placeholder="Enter account address" class="address-input">
+            <input type="text" id="account" placeholder="Enter account address" class="address-input" value="${walletAccount}">
         `;
     } else if (selectedFunction === 'allowance') {
         inputFieldsDiv.innerHTML = `
