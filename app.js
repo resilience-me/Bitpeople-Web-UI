@@ -326,7 +326,7 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, false)}
             <label for="id">Registry ID:</label>
-            <input type="text" id="id" placeholder="Enter ID">
+            <input type="number" id="id" min="0" placeholder="Enter registry ID (uint256)">
         `;
     } else if (selectedFunction === 'registryLength' || selectedFunction === 'shuffled' || selectedFunction === 'courts' || selectedFunction === 'permits' || selectedFunction === 'seed') {
         inputFieldsDiv.innerHTML = `
