@@ -206,7 +206,6 @@ const tokenSelectorHTML = `
 
 async function getCurrentSchedule() {
     const currentSchedule = await contract.methods.schedule().call();
-console.log(currentSchedule);
     return parseInt(currentSchedule, 10);
 }
 
