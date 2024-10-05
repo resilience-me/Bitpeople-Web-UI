@@ -342,6 +342,11 @@ async function handleFunctionSelect() {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(false, true, true)}
         `;
+    } else if (selectedFunction === 'pseudonymEvent') {
+        inputFieldsDiv.innerHTML = `
+            ${await getPeriodSelector(false, true, true)}
+	`;
+	document.getElementById('t').selectedIndex = 1;
     }
 
     if (selectedFunction != '') {
