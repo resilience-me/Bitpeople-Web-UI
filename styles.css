@@ -62,12 +62,6 @@ input[type="text"], select {
     border-radius: 4px; /* Rounded corners */
 }
 
-/* Style for the warning messages */
-#networkWarning {
-    color: red;
-    font-weight: bold;
-}
-
 .address-input {
     width: 46ch; /* Set a specific width for address fields */
     max-width: 100%; /* Prevent it from exceeding the container */
