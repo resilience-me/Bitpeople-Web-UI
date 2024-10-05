@@ -343,7 +343,6 @@ async function handleFunctionSelect() {
     }
 
     if (selectedFunction != '') {
-        // Show the submit button
         submitButton.style.display = 'block';
     }
 }
