@@ -349,6 +349,19 @@ async function handleFunctionSelect() {
     }
 }
 
+function formatUnixToReadableDate(unixTime) {
+    const date = new Date(Number(unixTime) * 1000);
+    return date.toLocaleString('en-GB', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        timeZoneName: 'short'
+    });
+}
+
 async function handleTransaction() {
     const selectedFunction = document.getElementById('functionSelect').value;
     const accounts = await web3.eth.getAccounts();
@@ -506,8 +519,8 @@ async function handleTransaction() {
         } else if (selectedFunction === 'pseudonymEvent') {
             const t = document.getElementById('t').value;
             const result = await contract.methods.pseudonymEvent(t).call();
-            resultField.innerText = `Pseudonym Event: ${result}`;
-        }
+            resultField.innerText = `Pseudonym Event: ${formatUnixToReadableDate(result)}`;
+	}
 
     } catch (error) {
         console.error('Transaction failed:', error);
