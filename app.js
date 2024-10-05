@@ -506,8 +506,7 @@ async function handleTransaction() {
         
         // SCHEDULE functions
         } else if (selectedFunction === 'schedule') {
-            const t = document.getElementById('t').value;
-            const result = await contract.methods.schedule(t).call();
+            const result = await contract.methods.schedule().call();
             resultField.innerText = `Schedule: ${result}`;
         } else if (selectedFunction === 'toSeconds') {
             const t = document.getElementById('t').value;
