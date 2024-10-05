@@ -257,7 +257,7 @@ async function handleFunctionSelect() {
     } else if (selectedFunction === 'borderVote') {
         inputFieldsDiv.innerHTML = `
             <label for="target">Target:</label>
-            <input type="text" id="target" placeholder="Enter target">
+            <input type="number" id="target" min="0" placeholder="Enter target (uint256)">
         `;
     } else if (selectedFunction === 'transfer') {
         inputFieldsDiv.innerHTML = `
