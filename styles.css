@@ -46,10 +46,6 @@ button:disabled {
     margin: 0 auto; /* Center the container */
 }
 
-#accountDisplay {
-    max-width: 100%; /* Ensure it doesn't exceed the container */
-}
-
 .separator {
     height: 2px; /* Thickness of the line */
     background-color: #ccc; /* Color of the line */
