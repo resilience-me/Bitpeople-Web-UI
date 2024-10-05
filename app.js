@@ -171,7 +171,6 @@ window.addEventListener('load', async () => {
         }
     } else {
         alert('No Ethereum wallet detected!');
-        // Disable the Connect Wallet button and show a message
         connectWalletButton.disabled = true;
         showWarning('No Ethereum wallet detected! Please install a Web3 wallet to connect.');
     }
@@ -180,7 +179,6 @@ window.addEventListener('load', async () => {
     document.getElementById('submitButton').addEventListener('click', handleTransaction);
 });
 
-// Token selector constant
 const tokenSelectorHTML = `
     <label for="token">Select Token:</label>
     <select id="token">
