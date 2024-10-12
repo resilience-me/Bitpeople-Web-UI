@@ -26,11 +26,13 @@ button:hover {
     background-color: #45a049; /* Darker green */
 }
 
-button:disabled {
+button.isConnecting,
+button.isHandling {
     background-color: #cccccc; /* Light gray background */
     color: #666666;            /* Darker gray text */
     cursor: not-allowed;       /* Show not-allowed cursor */
     opacity: 0.6;              /* Reduce opacity to make it look inactive */
+    pointer-events: none;      /* Disable interactions */
 }
 
 .info-message {
