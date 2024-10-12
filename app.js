@@ -430,13 +430,13 @@ async function handleTransaction() {
             const token = document.getElementById('token').value;
             const to = document.getElementById('to').value;
             const value = document.getElementById('value').value;
-            await contract.methods.transfer(to, value, token).send({ from: fromAccount, gasPrice });
+            await contract.methods.transfer(token, to, value).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Transfer!';
         } else if (selectedFunction === 'approve') {
             const token = document.getElementById('token').value;
             const spender = document.getElementById('spender').value;
             const value = document.getElementById('value').value;
-            await contract.methods.approve(spender, value, token).send({ from: fromAccount, gasPrice });
+            await contract.methods.approve(token, spender, value).send({ from: fromAccount, gasPrice });
             resultField.innerText = 'Transaction successful for Approve!';
         } else if (selectedFunction === 'transferFrom') {
             const token = document.getElementById('token').value;
