@@ -106,7 +106,12 @@ function resetUI() {
     clearFunctionContainer();
 }
 
+let isConnecting = false;
+
 async function handleAccountChange(accounts) {
+    if (isConnecting) return;
+    isConnecting = true;
+
     resetUI();
 
     if (accounts.length > 0) {
@@ -118,13 +123,11 @@ async function handleAccountChange(accounts) {
             showWarning('Failed to switch networks. Please refresh the page to try again.');
         }
     }
+    isConnecting = false;
 }
 
-let isConnecting = false;
-
 async function connectWallet() {
-    if (isConnecting) return; // Prevent multiple clicks
-    isConnecting = true;
+    if (isConnecting) return;
 
     const connectWalletButton = document.getElementById('connectWalletButton');
     connectWalletButton.disabled = true;
@@ -138,7 +141,6 @@ async function connectWallet() {
         console.error('Wallet connection failed', error);
         showWarning('Failed to connect to the wallet. Please try again.');
     } finally {
-        isConnecting = false;
         connectWalletButton.disabled = false;
     }
 }
