@@ -106,43 +106,46 @@ function resetUI() {
     clearFunctionContainer();
 }
 
-let isConnecting = false;
+let isHandleAccount = false;
 
 async function handleAccountChange(accounts) {
-    if (isConnecting) return;
-    isConnecting = true;
+    if (isHandleAccount) return;
+    isHandleAccount = true;
+
+    const connectWalletButton = document.getElementById('connectWalletButton');
+    connectWalletButton.classList.add('isHandling');
 
     resetUI();
 
     if (accounts.length > 0) {
-        const account = accounts[0];
+	const account = accounts[0];
         console.log('Connected account:', account);
         if (await handleNetworkCheck(account)) {
             setUI(account);
         } else {
-            showWarning('Failed to switch networks. Please refresh the page to try again.');
+            showWarning('Failed to switch networks. Please try again.');
         }
     }
-    isConnecting = false;
+    connectWalletButton.classList.remove('isHandling');
+    isHandleAccount = false;
 }
 
 async function connectWallet() {
-    if (isConnecting) return;
-
     const connectWalletButton = document.getElementById('connectWalletButton');
-    connectWalletButton.disabled = true;
+
+    connectWalletButton.classList.add('isConnecting');
+
 
     showNotification('Sent request to wallet to login...');
 
     try {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        await handleAccountChange(accounts);
+	await handleAccountChange(accounts);
     } catch (error) {
         console.error('Wallet connection failed', error);
         showWarning('Failed to connect to the wallet. Please try again.');
-    } finally {
-        connectWalletButton.disabled = false;
     }
+    connectWalletButton.classList.remove('isConnecting');
 }
 
 async function loadABI() {
