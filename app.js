@@ -503,6 +503,10 @@ async function handleTransaction() {
             const t = document.getElementById('t').value;
             const result = await contract.methods.permits(t).call();
             resultField.innerText = `Permits: ${result}`;
+        } else if (selectedFunction === 'pair') {
+            const id = document.getElementById('id').value;
+            const result = await contract.methods.pair(id).call();
+            resultField.innerText = `Pair: ${result}`;
         } else if (selectedFunction === 'commit') {
             const account = document.getElementById('account').value;
             const result = await contract.methods.commit(t, account).call();
