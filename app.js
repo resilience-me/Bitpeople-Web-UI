@@ -507,7 +507,7 @@ async function handleTransaction() {
             const t = document.getElementById('t').value;
             const id = document.getElementById('id').value;
             const result = await contract.methods.pair(t, id).call();
-            resultField.innerText = `Pair: ${result}`;
+            resultField.innerText = `Pair: ${JSON.stringify(result)}`;
         } else if (selectedFunction === 'commit') {
             const account = document.getElementById('account').value;
             const result = await contract.methods.commit(t, account).call();
