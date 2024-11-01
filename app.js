@@ -481,8 +481,7 @@ async function handleTransaction() {
 	    const t = document.getElementById('t').value;
 	    const account = document.getElementById('account').value;
 	    const result = await contract.methods.nym(t, account).call();
-	    const verifiedStatus = result.verified.join(', ');
-	    resultField.innerText = `Nym Result:\n- ID: ${result.id}\n- Verified: [${verifiedStatus}]`;
+	    resultField.innerText = `Nym Result:\n- ID: ${result.id}\n- Verified: [${result.verified}]`;
         } else if (selectedFunction === 'registry') {
             const t = document.getElementById('t').value;
             const id = document.getElementById('id').value;
