@@ -496,6 +496,7 @@ async function handleTransaction() {
             const result = await contract.methods.shuffled(t).call();
             resultField.innerText = `Shuffled: ${result}`;
 	} else if (selectedFunction === 'shuffler') {
+            const t = document.getElementById('t').value;
             const account = document.getElementById('account').value;
             const result = await contract.methods.shuffler(t, account).call();
             resultField.innerText = `Is Shuffler: ${result}`;
