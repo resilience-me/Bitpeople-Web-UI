@@ -508,7 +508,7 @@ async function handleTransaction() {
             const id = document.getElementById('id').value;
             const result = await contract.methods.pair(t, id).call();
             const verifiedStatus = result.verified.join(', ');
-            const disputedStatus = result.disputed ? "Yes" : "No";
+            const disputedStatus = result.disputed;
             resultField.innerText = `Pair Details:\n- Verified: [${verifiedStatus}]\n- Disputed: ${disputedStatus}`;
         } else if (selectedFunction === 'commit') {
             const account = document.getElementById('account').value;
