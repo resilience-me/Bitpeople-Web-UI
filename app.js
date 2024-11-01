@@ -324,7 +324,13 @@ async function handleFunctionSelect() {
             <label for="id">Nym ID:</label>
             <input type="number" id="id" min="0" placeholder="Enter ID (uint256)">
         `;
-    } else if (selectedFunction === 'nym' || selectedFunction === 'shuffler' || selectedFunction === 'court' || selectedFunction === 'commit') {
+    } else if (selectedFunction === 'nym' || selectedFunction === 'shuffler' || selectedFunction === 'commit') {
+        inputFieldsDiv.innerHTML = `
+            ${await getPeriodSelector(true, true, false)}
+            <label for="account">Account:</label>
+            <input type="text" id="account" placeholder="Enter account address" class="address-input" value="${walletAccount}">
+        `;
+    } else if (selectedFunction === 'court') {
         inputFieldsDiv.innerHTML = `
             ${await getPeriodSelector(true, true, false)}
             <label for="account">Account:</label>
