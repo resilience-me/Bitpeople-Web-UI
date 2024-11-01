@@ -489,7 +489,7 @@ async function handleTransaction() {
             resultField.innerText = `Registry Address: ${result}`;
         } else if (selectedFunction === 'registryLength') {
             const t = document.getElementById('t').value;
-            const result = await contract.methods.registry(t).call();
+            const result = await contract.methods.registryLength(t).call();
             resultField.innerText = `Registry Length: ${result}`;
         } else if (selectedFunction === 'shuffled') {
             const t = document.getElementById('t').value;
