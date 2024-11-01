@@ -510,7 +510,17 @@ async function handleTransaction() {
             const verifiedStatus = result.verified.join(', ');
             const disputedStatus = result.disputed;
             resultField.innerText = `Pair Details:\n- Verified: [${verifiedStatus}]\n- Disputed: ${disputedStatus}`;
-        } else if (selectedFunction === 'commit') {
+	} else if (selectedFunction === 'court') {
+	    const t = document.getElementById('t').value;
+	    const account = document.getElementById('account').value;
+	    const result = await contract.methods.court(t, account).call();
+	    const verifiedStatus = result.verified.join(', ');
+	    resultField.innerText = `Court Details:\n- Court ID: ${result.id}\n- Verified: [${verifiedStatus}]`;
+	} else if (selectedFunction === 'courts') {
+	    const t = document.getElementById('t').value;
+	    const result = await contract.methods.courts(t).call();
+	    resultField.innerText = `Total Courts: ${result}`;
+	} else if (selectedFunction === 'commit') {
             const account = document.getElementById('account').value;
             const result = await contract.methods.commit(t, account).call();
             resultField.innerText = `Commit: ${result}`;
