@@ -466,6 +466,7 @@ async function handleTransaction() {
             const result = await contract.methods.allowance(t, token, owner, spender).call();
             resultField.innerText = `Allowance: ${result}`;
         } else if (selectedFunction === 'proofOfUniqueHuman') {
+            const t = document.getElementById('t').value;
             const account = document.getElementById('account').value;
             const result = await contract.methods.proofOfUniqueHuman(t, account).call();
             resultField.innerText = `Proof Of Unique Human: ${result}`;
