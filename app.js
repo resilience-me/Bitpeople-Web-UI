@@ -522,6 +522,7 @@ async function handleTransaction() {
 	    const result = await contract.methods.courts(t).call();
 	    resultField.innerText = `Total Courts: ${result}`;
 	} else if (selectedFunction === 'commit') {
+	    const t = document.getElementById('t').value;
             const account = document.getElementById('account').value;
             const result = await contract.methods.commit(t, account).call();
             resultField.innerText = `Commit: ${result}`;
